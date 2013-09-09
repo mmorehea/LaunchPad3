@@ -14,6 +14,7 @@ public class WVULaunchPad3 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Part testPart = new Part("p4_c3_nucleus.obj");
+        System.out.println(testPart.getType());
     }
 }
