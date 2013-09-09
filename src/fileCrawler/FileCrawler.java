@@ -1,25 +1,25 @@
+package fileCrawler;
+
 import java.io.File;
+import java.util.ArrayList;
+import javax.swing.JTree;
+import wvulaunchpad3.*;
+
 
 public class FileCrawler {
-	public static void main(String[] args) {
-		File f = new File("/home/calvr/Dropbox");
-        crawl(f);
-	}
-    
-	
-	public static void crawl(File f) {
-    	crawl(f, "");
-    }
-    
-    private static void crawl(File f, String indent) {
-    	System.out.println(indent + f.getAbsolutePath());
+	    
+
+    public static ArrayList<String> crawl(File f) {
+        ArrayList<String> aS = new ArrayList<String>();
+    	//System.out.println(f.getAbsoluteFile().toString());
+        aS.add(f.getName());
     	if (f.isDirectory()) {
         	File[] subFiles = f.listFiles();
-    		indent += "    ";
-        	for (int i = 0; i < subFiles.length; i++) {
-              	crawl(subFiles[i], indent);
+    	  	for (int i = 0; i < subFiles.length; i++) {
+              	aS.add((subFiles[i].getName()));
         	}
 
     	}
+            return aS;
     }
 }

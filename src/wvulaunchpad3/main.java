@@ -4,6 +4,14 @@
  */
 package wvulaunchpad3;
 
+import java.io.File;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreePath;
+
 /**
  *
  * @author callie
@@ -15,6 +23,7 @@ public class main extends javax.swing.JFrame {
      */
     public main() {
         initComponents();
+        getAndSetTree();  
     }
 
     /**
@@ -97,13 +106,43 @@ public class main extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new main().setVisible(true);
+                
+               
             }
+
+                            
         });
     }
+                   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
+    
+    public void  populateTree(ArrayList<String> aS) {
+        DefaultMutableTreeNode tree = new DefaultMutableTreeNode("Volumes");
+        DefaultMutableTreeNode category = new DefaultMutableTreeNode("P4");
+        tree.add(category);
+        System.out.println(aS.toString());
+        
+        for (int i = 0; i < aS.size(); i++) {
+            DefaultMutableTreeNode cell = new DefaultMutableTreeNode(aS.get(i));
+            System.out.println(aS.get(i));
+            category.add(cell);
+            
+        }
+        DefaultTreeModel model = new DefaultTreeModel(tree);
+        jTree1.setModel(model);
+        
+    }
+    private  void getAndSetTree() {
+                ArrayList<String> aS = new ArrayList<String>();
+                aS = fileCrawler.FileCrawler.crawl(new File("/home/data/P4_cells"));
+                populateTree(aS);
+            }
+
+
+
 }
