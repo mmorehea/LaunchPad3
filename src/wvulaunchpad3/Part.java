@@ -4,6 +4,7 @@
  */
 package wvulaunchpad3;
 
+import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,15 +16,11 @@ public class Part {
     private String type;
     private String filePath;
     
-    Pattern pattern = Pattern.compile("([a-zA-Z0-9]+)");
     
-    public Part(String filePath){
-        this.filePath = filePath;
-        Matcher matcher = pattern.matcher(filePath);
-        if (matcher.find()){
-            type = matcher.group(0);
+    
+    public Part(File partFile){
+        
         }
-    }
     
     public String getType(){
         return type;

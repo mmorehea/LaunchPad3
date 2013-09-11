@@ -31,6 +31,10 @@ public class main extends javax.swing.JFrame {
         initComponents();
         getAndSetTree();
         jList1.removeAll();
+        File[] cellDirectories = new File[2];
+        cellDirectories[0] = new File("/home/data/P3_cells/p3_c3");
+        cellDirectories[1] = new File("/home/data/P3_cells/p3_c5");
+        Set set = new Set(cellDirectories);
     }
 
     /**
@@ -167,36 +171,33 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
-
     Pattern cellPattern = Pattern.compile("p[1-9]+_c[1-9]+");
-    
+
     private void recursivePopulate(DefaultMutableTreeNode parent, File f) {
-     
-        
+        DefaultMutableTreeNode cell = new DefaultMutableTreeNode(f);
+        parent.add(cell); //If we only want directories, put this line inside subsequent if statement
+
         if (f.isDirectory()) {
-            DefaultMutableTreeNode cell = new DefaultMutableTreeNode(f);
-             parent.add(cell); //If we only want directories, put this line inside subsequent if statement
-       
-            
+
+
+
             File[] subFiles = f.listFiles();
-            
+
             //---Recurse through all sub directories/files
             for (int i = 0; i < subFiles.length; i++) {
                 recursivePopulate(cell, subFiles[i]);
             }
-        }
-        
-        else{
+        } else {
             //-----Need to create part out of File "f"
         }
     }
 
     private void getAndSetTree() {
-     //   ArrayList<File> aS = new ArrayList<File>();
+        //   ArrayList<File> aS = new ArrayList<File>();
         DefaultMutableTreeNode tree = new DefaultMutableTreeNode("Volumes");
         recursivePopulate(tree, new File("/home/data/P3_cells"));
         DefaultTreeModel model = new DefaultTreeModel(tree);
-        
+
         jTree1.setModel(model);
     }
 }

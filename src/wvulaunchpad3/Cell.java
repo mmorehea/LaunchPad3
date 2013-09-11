@@ -4,6 +4,7 @@
  */
 package wvulaunchpad3;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -13,10 +14,10 @@ import java.util.ArrayList;
 public class Cell {
     private ArrayList<Part> parts;
     
-    public Cell(String[] filePaths){
-        for (String filePath : filePaths){
-            parts.add(new Part(filePath));
+    public Cell(File cellDirectory){
+        File[] partFiles = cellDirectory.listFiles();
+        for (File partFile : partFiles){
+            parts.add(new Part(partFile));
         }
     }
-    
 }

@@ -4,6 +4,7 @@
  */
 package wvulaunchpad3;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -15,11 +16,9 @@ public class Set {
     private ArrayList<Cell> cells;
     private String name;
     
-    Pattern pattern = Pattern.compile("(");
-    
-    public Set(String[] filePaths){
-        cells = new ArrayList<Cell>();
-        
-        
+    public Set(File[] cellDirectories){
+        for (File cellDirectory : cellDirectories){
+            cells.add(new Cell(cellDirectory));
+        }
     }
 }
