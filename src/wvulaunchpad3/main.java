@@ -22,8 +22,10 @@ public class main extends javax.swing.JFrame {
      * Creates new form main
      */
     public main() {
+        // System.out.println("this happened in main");
         initComponents();
-        getAndSetTree();  
+        getAndSetTree();
+        jList1.removeAll();
     }
 
     /**
@@ -144,14 +146,11 @@ public class main extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new main().setVisible(true);
-                
-               
-            }
 
-                            
+
+            }
         });
     }
-                   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -163,29 +162,28 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
+
+   // private 
     
-    public void  populateTree(ArrayList<String> aS) {
-        DefaultMutableTreeNode tree = new DefaultMutableTreeNode("Volumes");
-        DefaultMutableTreeNode category = new DefaultMutableTreeNode("P4");
-        tree.add(category);
-        System.out.println(aS.toString());
-        
-        for (int i = 0; i < aS.size(); i++) {
-            DefaultMutableTreeNode cell = new DefaultMutableTreeNode(aS.get(i));
-            System.out.println(aS.get(i));
-            category.add(cell);
-            
+    private void recursivePopulate(DefaultMutableTreeNode parent, File f) {
+        DefaultMutableTreeNode cell = new DefaultMutableTreeNode(f.getName());
+        parent.add(cell);
+        if (f.isDirectory()) {
+            File[] subFiles = f.listFiles();
+            for (int i = 0; i < subFiles.length; i++) {
+                recursivePopulate(cell, subFiles[i]);
+            }
         }
+        else{
+            //File paths that will go into cell parts
+        }
+    }
+
+    private void getAndSetTree() {
+        ArrayList<File> aS = new ArrayList<File>();
+        DefaultMutableTreeNode tree = new DefaultMutableTreeNode("Volumes");
+        recursivePopulate(tree, new File("/home/data/P3_cells"));
         DefaultTreeModel model = new DefaultTreeModel(tree);
         jTree1.setModel(model);
-        
     }
-    private  void getAndSetTree() {
-                ArrayList<String> aS = new ArrayList<String>();
-                aS = fileCrawler.FileCrawler.crawl(new File("/home/data/P4_cells"));
-                populateTree(aS);
-            }
-
-
-
 }
