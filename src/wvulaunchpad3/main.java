@@ -5,8 +5,13 @@
 package wvulaunchpad3;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
@@ -163,27 +168,35 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
 
-   // private 
+    Pattern cellPattern = Pattern.compile("p[1-9]+_c[1-9]+");
     
     private void recursivePopulate(DefaultMutableTreeNode parent, File f) {
-        DefaultMutableTreeNode cell = new DefaultMutableTreeNode(f.getName());
-        parent.add(cell);
+     
+        
         if (f.isDirectory()) {
+            DefaultMutableTreeNode cell = new DefaultMutableTreeNode(f);
+             parent.add(cell); //If we only want directories, put this line inside subsequent if statement
+       
+            
             File[] subFiles = f.listFiles();
+            
+            //---Recurse through all sub directories/files
             for (int i = 0; i < subFiles.length; i++) {
                 recursivePopulate(cell, subFiles[i]);
             }
         }
+        
         else{
-            //File paths that will go into cell parts
+            //-----Need to create part out of File "f"
         }
     }
 
     private void getAndSetTree() {
-        ArrayList<File> aS = new ArrayList<File>();
+     //   ArrayList<File> aS = new ArrayList<File>();
         DefaultMutableTreeNode tree = new DefaultMutableTreeNode("Volumes");
         recursivePopulate(tree, new File("/home/data/P3_cells"));
         DefaultTreeModel model = new DefaultTreeModel(tree);
+        
         jTree1.setModel(model);
     }
 }
