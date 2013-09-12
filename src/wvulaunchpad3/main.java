@@ -47,18 +47,18 @@ public class main extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        volumeTree = new javax.swing.JTree();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        launchButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jScrollPane1.setViewportView(jTree1);
+        jScrollPane1.setViewportView(volumeTree);
 
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -71,7 +71,12 @@ public class main extends javax.swing.JFrame {
 
         jButton2.setText("Remove");
 
-        jButton3.setText("Launch");
+        launchButton.setText("Launch");
+        launchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                launchButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Set Repository");
 
@@ -88,11 +93,10 @@ public class main extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE))
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(launchButton, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
@@ -115,7 +119,7 @@ public class main extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(launchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -123,6 +127,10 @@ public class main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void launchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_launchButtonActionPerformed
+        
+    }//GEN-LAST:event_launchButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,41 +171,37 @@ public class main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTree jTree1;
+    private javax.swing.JButton launchButton;
+    private javax.swing.JTree volumeTree;
     // End of variables declaration//GEN-END:variables
-    Pattern cellPattern = Pattern.compile("p[1-9]+_c[1-9]+");
+    
+    //Pattern cellPattern = Pattern.compile("p[1-9]+_c[1-9]+");
 
-    private void recursivePopulate(DefaultMutableTreeNode parent, File f) {
+        private void getAndSetTree() {
+        DefaultMutableTreeNode tree = new DefaultMutableTreeNode("Volumes");
+        recursivePopulate(tree, new CellDirectory("/home/data/P3_cells"));
+        DefaultTreeModel model = new DefaultTreeModel(tree);
+        volumeTree.setModel(model);
+    
+    }
+    
+    private void recursivePopulate(DefaultMutableTreeNode parent, CellDirectory f) {
         DefaultMutableTreeNode cell = new DefaultMutableTreeNode(f);
         parent.add(cell); //If we only want directories, put this line inside subsequent if statement
 
         if (f.isDirectory()) {
 
-
-
             File[] subFiles = f.listFiles();
 
             //---Recurse through all sub directories/files
             for (int i = 0; i < subFiles.length; i++) {
-                recursivePopulate(cell, subFiles[i]);
+                recursivePopulate(cell, (new CellDirectory(subFiles[i])));
             }
-        } else {
-            //-----Need to create part out of File "f"
         }
-    }
-
-    private void getAndSetTree() {
-        //   ArrayList<File> aS = new ArrayList<File>();
-        DefaultMutableTreeNode tree = new DefaultMutableTreeNode("Volumes");
-        recursivePopulate(tree, new File("/home/data/P3_cells"));
-        DefaultTreeModel model = new DefaultTreeModel(tree);
-
-        jTree1.setModel(model);
     }
 }
