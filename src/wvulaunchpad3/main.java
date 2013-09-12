@@ -34,10 +34,6 @@ public class main extends javax.swing.JFrame {
         initComponents();
         getAndSetTree();
         jList1.removeAll();
-        File[] cellDirectories = new File[2];
-        cellDirectories[0] = new File("/home/data/P3_cells/p3_c3");
-        cellDirectories[1] = new File("/home/data/P3_cells/p3_c5");
-        Set set = new Set(cellDirectories);
     }
 
     /**
@@ -133,10 +129,12 @@ public class main extends javax.swing.JFrame {
 
     private void launchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_launchButtonActionPerformed
         TreePath[] selectionPaths = volumeTree.getSelectionPaths();
-        File[] cellDirectories = new File[selectionPaths.length];
+        CellDirectory[] cellDirectories = new CellDirectory[selectionPaths.length];
         for (int i = 0; i < cellDirectories.length; i++){
-            //System.out.println(selectionPaths[i].getLastPathComponent());
-            //cellDirectories[i] = (File)selectionPaths[i].getLastPathComponent();
+            DefaultMutableTreeNode selectedNode = new DefaultMutableTreeNode(selectionPaths[i].getLastPathComponent());
+            System.out.println(selectedNode.getUserObject().getClass());
+            //CellDirectory cellDirectory = (CellDirectory)selectedNode.getUserObject();
+            //cellDirectories[i] = cellDirectory;
         }
         //Set set = new Set(cellDirectories);
         //System.out.println(set.toXML());
@@ -204,6 +202,7 @@ public class main extends javax.swing.JFrame {
     
     private void recursivePopulate(DefaultMutableTreeNode parent, CellDirectory f) {
         DefaultMutableTreeNode cell = new DefaultMutableTreeNode(f);
+        System.out.println(cell.getUserObject());
         parent.add(cell); //If we only want directories, put this line inside subsequent if statement
 
         if (f.isDirectory()) {
