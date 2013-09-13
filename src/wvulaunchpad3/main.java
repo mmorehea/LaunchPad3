@@ -12,17 +12,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.DefaultTreeSelectionModel;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
+import javax.swing.tree.TreeSelectionModel;
 
 /**
  *
  * @author callie
  */
 public class main extends javax.swing.JFrame {
-
+String dataPath = "/home/data/P3_cells/";
     /**
      * Creates new form main
      */
@@ -31,10 +34,7 @@ public class main extends javax.swing.JFrame {
         initComponents();
         getAndSetTree();
         jList1.removeAll();
-        File[] cellDirectories = new File[2];
-        cellDirectories[0] = new File("/home/data/P3_cells/p3_c3");
-        cellDirectories[1] = new File("/home/data/P3_cells/p3_c5");
-        Set set = new Set(cellDirectories);
+        
     }
 
     /**
@@ -129,7 +129,29 @@ public class main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void launchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_launchButtonActionPerformed
-        
+        TreePath[] selectionPaths = volumeTree.getSelectionPaths();
+        File[] cellDirectories = new File[selectionPaths.length];
+        for (int i = 0; i < cellDirectories.length; i++){
+            DefaultMutableTreeNode selectedNode = new DefaultMutableTreeNode(selectionPaths[i].getLastPathComponent());
+            
+            String x = selectedNode.getUserObject().toString();
+            
+            x = dataPath +x + '/';
+            cellDirectories[i] = new File(x);
+        }
+    try {
+        Set set = new Set(cellDirectories);
+        System.out.println(set.toXML());
+    } catch (IOException ex) {
+        Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
+    
+    
+    
+    
+    
+    
     }//GEN-LAST:event_launchButtonActionPerformed
 
     /**
@@ -183,15 +205,18 @@ public class main extends javax.swing.JFrame {
     //Pattern cellPattern = Pattern.compile("p[1-9]+_c[1-9]+");
 
         private void getAndSetTree() {
-        DefaultMutableTreeNode tree = new DefaultMutableTreeNode("Volumes");
-        recursivePopulate(tree, new CellDirectory("/home/data/P3_cells"));
-        DefaultTreeModel model = new DefaultTreeModel(tree);
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Volumes");
+        recursivePopulate(root, new CellDirectory("/home/data/P3_cells"));
+        DefaultTreeModel model = new DefaultTreeModel(root);
         volumeTree.setModel(model);
-    
+        volumeTree.setSelectionModel(new DefaultTreeSelectionModel());
+        volumeTree.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION); 
+        
     }
     
     private void recursivePopulate(DefaultMutableTreeNode parent, CellDirectory f) {
         DefaultMutableTreeNode cell = new DefaultMutableTreeNode(f);
+        //System.out.println(cell.getUserObject());
         parent.add(cell); //If we only want directories, put this line inside subsequent if statement
 
         if (f.isDirectory()) {
