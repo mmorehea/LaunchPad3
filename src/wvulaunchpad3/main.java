@@ -25,7 +25,7 @@ import javax.swing.tree.TreeSelectionModel;
  * @author callie
  */
 public class main extends javax.swing.JFrame {
-
+String dataPath = "/home/data/P3_cells/";
     /**
      * Creates new form main
      */
@@ -34,6 +34,7 @@ public class main extends javax.swing.JFrame {
         initComponents();
         getAndSetTree();
         jList1.removeAll();
+        
     }
 
     /**
@@ -129,15 +130,28 @@ public class main extends javax.swing.JFrame {
 
     private void launchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_launchButtonActionPerformed
         TreePath[] selectionPaths = volumeTree.getSelectionPaths();
-        CellDirectory[] cellDirectories = new CellDirectory[selectionPaths.length];
+        File[] cellDirectories = new File[selectionPaths.length];
         for (int i = 0; i < cellDirectories.length; i++){
             DefaultMutableTreeNode selectedNode = new DefaultMutableTreeNode(selectionPaths[i].getLastPathComponent());
-            System.out.println(selectedNode.getUserObject().getClass());
-            //CellDirectory cellDirectory = (CellDirectory)selectedNode.getUserObject();
-            //cellDirectories[i] = cellDirectory;
+            
+            String x = selectedNode.getUserObject().toString();
+            
+            x = dataPath +x + '/';
+            cellDirectories[i] = new File(x);
         }
-        //Set set = new Set(cellDirectories);
-        //System.out.println(set.toXML());
+    try {
+        Set set = new Set(cellDirectories);
+        System.out.println(set.toXML());
+    } catch (IOException ex) {
+        Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
+    
+    
+    
+    
+    
+    
     }//GEN-LAST:event_launchButtonActionPerformed
 
     /**
@@ -202,7 +216,7 @@ public class main extends javax.swing.JFrame {
     
     private void recursivePopulate(DefaultMutableTreeNode parent, CellDirectory f) {
         DefaultMutableTreeNode cell = new DefaultMutableTreeNode(f);
-        System.out.println(cell.getUserObject());
+        //System.out.println(cell.getUserObject());
         parent.add(cell); //If we only want directories, put this line inside subsequent if statement
 
         if (f.isDirectory()) {
