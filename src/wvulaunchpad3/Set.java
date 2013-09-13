@@ -5,6 +5,7 @@
 package wvulaunchpad3;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -15,7 +16,7 @@ import java.util.regex.Pattern;
 public class Set {
     private ArrayList<Cell> cells;
     
-    public Set(File[] cellDirectories){
+    public Set(File[] cellDirectories) throws IOException{
         cells = new ArrayList<Cell>();
         for (File cellDirectory : cellDirectories){
             cells.add(new Cell(cellDirectory));
