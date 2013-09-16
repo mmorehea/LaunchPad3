@@ -7,7 +7,6 @@ package wvulaunchpad3;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 /**
  *
@@ -36,7 +35,6 @@ public class Set {
         
         xml += "</Structure>\n";
         xml += "</SetView>\n";
-        System.out.println(xml);
         return xml;
     }
 }
