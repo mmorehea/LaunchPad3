@@ -23,37 +23,18 @@ public class XMLWriter {
         setViewXML = set.toXML();
     }
     
-    public void write(){
-        Scanner reader = null;
-        File configFile = new File("setConfig.xml");
-        if (configFile.exists()) configFile.delete();
-        try {
-            configFile.createNewFile();
-        } catch (IOException ex) {
-            Logger.getLogger(XMLWriter.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        /*
-        FileWriter writer = null;
-        try {
-            writer = new FileWriter(configFile, true);
-            reader = new Scanner(new File("/ConfigFiles/preSetViewXML.xml"));
-        } catch (IOException ex) {
-            Logger.getLogger(XMLWriter.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            while (reader.hasNext()){
-                writer.write(reader.next());
-            }
-            writer.write(setViewXML);
-            reader = new Scanner(new File("/ConfigFiles/postSetViewXML.xml"));
-            while (reader.hasNext()){
-                writer.write(reader.next());
-            }
-            writer.close();
-            reader.close();
-        } catch (IOException ex) {
-            Logger.getLogger(XMLWriter.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        */
+    public void write() throws FileNotFoundException, IOException{
+    FileWriter fw = new FileWriter("/home/callie/Desktop/middle.xml");
+            fw.write(this.setViewXML);
+    fw.close();
+    String[] params = new String [6];
+    params[0] = "python";
+    params[1] = "/home/callie/Desktop/xmlWriter.py";
+    params[2] = "/home/callie/Desktop/beginning.xml";
+    params[3] = "/home/callie/Desktop/middle.xml";
+    params[4] = "/home/callie/Desktop/end.xml";
+    params[5] = "/home/callie/Desktop/new.xml";
+    Runtime.getRuntime().exec(params);
+
     }
 }
