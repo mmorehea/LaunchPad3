@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+ <GLOBAL>
+
+   <!--Background g="0.6" a=".5" r=".6" b=".6"/-->
+   <Background g="0.239215686" a="0.5" r="0.509803922" b="0.17647"/>
+   <Stencil value="true" />
+   <MultiThreaded value="CullDrawThreadPerContext" />
+   <!--MultiThreaded value="SingleThreaded" /-->
+   <Freeze value="true"/>
+   <SyncToVBlank value="ON" />
+   <Near value="100"/>
+   <Far value="100000000" />
+   <CullingMode value="CALVR" /> <!-- CALVR | DEFAULT -->
+   <MultiSample value="4" />
+
+   <ShowAxis value="off" />
+
+   <ConfigDebug value="false" />
+   <GeneralDebug value="true" />
+   
+   <EyeSeparation value="off"/>
+
+<Input>
+ <Threaded FPS="60.0" />
+ <TrackingSystem0 value="MOUSE">
+  <Offset x="0" y="0" z="0" />
+  <Orientation h="0" p="0" r="0" />
+  <NumBodies value="1" />
+  <NumButtons value="3" />
+  <NumValuators value="0" />
+  <Body0>
+   <Offset x="0" y="0" z="0" />
+   <Orientation h="0" p="0" r="0" />
+  </Body0>
+ </TrackingSystem0>
+
+ <NumHeads value="1" />
+ <Head0Address system="1" body="0" />
+ <NumHands value="2" />
+ <Hand0>
+  <Address system="0" body="0" />
+  <ButtonMask system0="0xFF" system1="0x00" />
+ </Hand0>
+ <Hand1>
+  <Address system="0" body="1" />
+  <ButtonMask system0="0x00" system1="0xFF" />
+  <Valuator0 system="1" number="0" type="NON_ZERO" />
+ </Hand1>
+</Input>
+	<TrackingDebug value="off" />
+	<Threaded FPS="60.0" />
+   <Plugin>
+
+    <ParticleDreams value="on">
+      <DataDir value="/home/calvr/CVRPlugins/calit2/ParticleDreams" />
+    </ParticleDreams>
+
+    <Sketch value="off" />
+    <GreenLight value="off" />
+    
+    <AndroidNavigator value="off" />
+
+    <Points value="on" >
+      <ShaderPath value="/home/calvr/CVRPlugins/calit2/Points/shaders" />
+    </Points>
+
+    <PointsWithPans value="off">
+      <Sets>
+        <GalleryTest file="/data/PointsData/gal12NdrfFilterFilt-r8.xyb" scale="1000" x="0" y="0" z="0">
+	  <KGallery1 x="0" y="0" z="0" name="KGallery1" />
+	  <KGallery2 x="0" y="1" z="0" name="KGallery2"/>
+	</GalleryTest>
+      </Sets>
+    </PointsWithPans>
+
+    <PanoViewLOD value="on">
+     <FloorOffset value="880" />
+     <ShaderDir value="/data/Pans/PansLOD/glsl/" />
+     <ImageSearchPath value="/data/Pans/PansLOD" />
+     <DefaultConfigDir value="/data/Pans/PansLOD/config/" />
+     <CacheSize value="1024" />
+     <DiskCacheSize value="4096" />
+     <ReadThreads value="1" />
+     <CopyThreads value="6" />
+     <SpinScale value="0.5" />
+     <ZoomScale value="-1.0" />
+     <Pans>
+       <Luxor>
+         <LuxorKarnakObelisks />
+         <LuxorMedinetColumnsBlueCeiling />
+         <LuxorMedinetHabuCourt />
+         <LuxorMedinetHabuRoyalTreasure1 />
+         <LuxorMedinetHabuRoyalTreasure2 />
+         <LuxorMHoutback />
+         <LuxorMHwall />
+         <LuxorRamasseum />
+         <LuxorSet />
+         <LuxorTempleChapel />
+         <LuxorTempleEntryNight />
+         <LuxorTempleNight2 />
+         <LuxorTempleOutsideColumn />
+       </Luxor>
+       <BluebonnetSet />
+       <Dr-Seuss />
+     </Pans>
+    </PanoViewLOD>
+
+    <ArtifactVis value="off" />
+    
+    <ParticleDreams value="on">
+     
+    </ParticleDreams>
+    
+     <AlgebraInMotion value="on">
+    </AlgebraInMotion>
+
+	<Obscura value="on"/>
+    <GreenLight>
+      <Components textureDir="/home/aprudhom/data/GreenLight/maps/">
+          <!-- Texture files should contain both the front and back faces, front on top-->
+          <C1 startname="convey" height="2" minWattage="620" maxWattage="690" texture="unwrap_ConveyHC1.png" />
+          <C2 startname="gpu" height="4" minWattage="233" maxWattage="493" texture="unwrap_gpuKOInVidia.png" />
+          <C3 startname="compute" height="1" minWattage="195" maxWattage="453"     texture="unwrap_pcIntelDualXeonQC5430n5440.png" />
+          <C4 startname="headnode" height="1" minWattage="198" maxWattage="289" texture="unwrap_pcIntelDualXeonQC5430n5440.png" />
+          <C5 startname="bbextreme" height="1" minWattage="68" maxWattage="102" texture="switch_unwrap.png" />
+          <C6 startname="thumper" height="4" minWattage="404" maxWattage="642" texture="unwrap_thumperSunFireX4540.png" />
+          <C7 startname="int-nehalem" height="2" minWattage="104" maxWattage="281" texture="unwrap_IntelSR2600URLXNehalem.png" />
+          <C8 startname="sun-nehalem" height="2" minWattage="60" maxWattage="350" />
+          <C9 startname="greenstar" height="2" minWattage="10000" maxWattage="10001" />
+          <Ca startname="vm" height="1" minWattage="1" maxWattage="2" />
+          <Dc startname="DC" height ="12" minWattage="1" maxWattage="2" texture="unwrap_dcmeter.png" />
+        </Components>
+        <Demo value="on" />
+        <Hardware
+          local="/home/aprudhom/data/GreenLight/GreenLightAssets.fakejson"
+          download="http://glimpse.calit2.net/beta/json-assets.php?facility=GreenLight" />
+        <ModelsDir value="/home/aprudhom/data/GreenLight/Models/" />
+        <Power
+          local="/home/aprudhom/data/GreenLight/GLpower.xml"
+          download="http://glimpse.calit2.net/beta/jmangan/bbreport.php?facility=GreenLight&amp;type=power" />
+        <Shaders
+          fragment="/home/aprudhom/data/GreenLight/shaders/component.frag"
+          vertex="/home/aprudhom/data/GreenLight/shaders/component.vert" />
+    </GreenLight>
+
+    <StructView value="off">
+		<Structure>
+			<NumLayers value="1"/>
+			<Layer0>
+				<name value=" "/>
+				<file value="/home/calvr/Downloads/p3_cells_3_5_6_7_9.obj"/>
+				<color r="138" g="138" b="138"/>
+			</Layer0>
+		</Structure>
+    </StructView>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                

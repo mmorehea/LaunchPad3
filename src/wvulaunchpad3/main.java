@@ -6,17 +6,11 @@ package wvulaunchpad3;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultTreeSelectionModel;
-import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
@@ -131,27 +125,18 @@ String dataPath = "/home/data/P3_cells/";
     private void launchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_launchButtonActionPerformed
         TreePath[] selectionPaths = volumeTree.getSelectionPaths();
         File[] cellDirectories = new File[selectionPaths.length];
-        for (int i = 0; i < cellDirectories.length; i++){
+        for (int i = 0; i < cellDirectories.length; i++) {
             DefaultMutableTreeNode selectedNode = new DefaultMutableTreeNode(selectionPaths[i].getLastPathComponent());
-            
             String x = selectedNode.getUserObject().toString();
-            
-            x = dataPath +x + '/';
+            x = dataPath + x + '/';
             cellDirectories[i] = new File(x);
         }
-    try {
-        Set set = new Set(cellDirectories);
-        //new XMLWriter().write(set.toXML());
-    } catch (IOException ex) {
-        Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    
-    
-    
-    
-    
-    
-    
+        try {
+            Set set = new Set(cellDirectories);
+            new XMLWriter(set).write();
+        } catch (IOException ex) {
+            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_launchButtonActionPerformed
 
     /**
