@@ -1,0 +1,119 @@
+   <ArtifactVis>
+          <Database value="/home/aprudhom/data/ArtifactVis/artifactslist.txt" />
+	  <TopoFile value="/home/aprudhom/data/kyle/3d-model/Ken3dv3.wrl" />
+	  <PicFolder value="/home/covise/data/kyle/pictures/AllPics/" />
+	  <DCInfoFile value="/home/aprudhom/CVRPlugins/calit2/ArtifactVis/DCCategories.txt" />
+	  <LociFile value="/home/aprudhom/CVRPlugins/calit2/ArtifactVis/AreaMLociDepth.kml" />
+	  <ArtifactFileList value="/home/covise/data/3DArtifacts.txt" />
+	  <ArchInterfaceFolder value="/home/aprudhom/data/ArchInterface/" />
+          <MaxVisibleRange value="1000000000.0" />
+          <Offset>
+            <X value="-3396591.682" />
+            <Y value="-733458.55" />
+            <Z value="-49.44" />
+          </Offset>
+          <Site>
+            <Longitude value="35.491239" />
+            <Latitude value="30.628039" />
+            <!--Height value="0" /-->
+            <!--Scale value="1" /-->
+          </Site>
+          <Tessellation value=".2" />
+	  <ArtifactPanel x="-200" y="25" z="100" scale="1.0" />
+        </ArtifactVis>
+
+    <ModelLoader value="on" >
+      <ConfigDir value="/data/ModelLoader/" />
+      <Files>
+        <p2_bundle path="/data/p2_Large_Axons.obj" mask="0" />
+	<p3_c13 path="/home/data/baybridge/p3_c13.wrl" mask="0" />
+	<p6_c13_cellbody path="/data/p6/p6_c14_cellbody.obj" mask="0" />
+	<building_Sample path="/home/data/falko/se_building.obj" mask="0"/>
+	<bay_bridge path="/home/data/baybridge/T1Block01A_OneQuarter_StructSteel_noPiles.wrl" mask="0"/>
+	<p6_c41 path="/home/data/p6_c41.wrl" mask="0"/>
+	<p3_c3_c5 path="/home/data/p3/p3_c3_c5.wrl" mask="0"/>
+	<test path="/home/data/p3/p3_c3_c5.obj" mask="0"/>
+      </Files>                          
+    </ModelLoader>
+
+    <ImageViewer value="on" >
+      <DefaultPaths value="/home/calvr/Downloads/" />
+      <Files>
+        <BeijingCraftShop fileLeft="1.jpg" fileRight="1.jpg" />
+	<Test>
+	  <YuHuan fileLeft="2.jpg" fileRight="2.jpg" />
+	  <Test2>
+	    <TerraCottaPit fileLeft="1.jpg" fileRight="1.jpg" />
+	  </Test2>
+	</Test>
+	<Test3>
+	  <TianjinVases fileLeft="2.jpg" fileRight="2.jpg" />
+	</Test3>
+      </Files>
+    </ImageViewer>
+
+    
+    <Quit value = "off">
+    
+    </Quit>
+    
+
+    <SampleEarth value="on"> 
+    </SampleEarth>
+    <OSGEarth value="on"> 
+    </OSGEarth>
+
+   </Plugin>
+
+   <ContextMenus>
+     <Scale value="1.0" />
+     <MinDistance value="750" />
+     <MaxDistance value="1000" />
+     <DefaultOpenButton value="1" />
+   </ContextMenus>
+
+   <MenuSystem type="BOARDMENU">
+    <BoardMenu>
+     <Position distance="50" />
+     <Scale value="2.0" />
+     <Buttons select="0" open="1" />
+     <Trigger value="DOUBLECLICK" />
+    </BoardMenu>
+   </MenuSystem>
+
+   <ViewerPosition x="0" y="-1000" z="0" />
+   <SceneSize value="500" />
+
+   <NumPipes value="1" />
+   <NumWindows value="1" />
+   <NumScreens value="1" />
+
+ 
+   <PipeConfig>
+     <Pipe server="0" screen="0" name="0" />
+     <Pipe server="0" screen="1" name="1" />
+   </PipeConfig>
+
+
+   <NumChannels value="1" />
+<ChannelConfig>
+ <Channel width="1280" height="1024" left="0" bottom="0" stereoMode="LEFT"  windowIndex="0"  name="0" />
+ <Channel width="1280" height="1024" left="0" bottom="0" stereoMode="RIGHT"  windowIndex="1"  name="1" />
+</ChannelConfig>
+   
+   <WindowConfig>
+     <Window width="1280" pipeIndex="0" height="1024" left="0" bottom="0" name="0" />
+     <Window width="1280" pipeIndex="1" height="1024" left="0" bottom="0" name="1" />
+   </WindowConfig>
+
+   <NumScreens value="1" />
+<ScreenConfig>
+ <Screen width="1280" height="1024" originX="0" originY="0" originZ="0" h="0.0" p="0.0" r="0.0" name="0" />
+</ScreenConfig>
+
+
+   <MultiViewerFunction a="-0.1823784" b="-0.095493" c="1.0" />
+
+ </GLOBAL>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                               
