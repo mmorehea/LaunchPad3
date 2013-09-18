@@ -58,6 +58,7 @@ String dataPath = "/home/data/P3_cells/";
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        volumeTree.setSelectionModel(null);
         jScrollPane1.setViewportView(volumeTree);
 
         jList1.setModel(new javax.swing.AbstractListModel() {
@@ -130,10 +131,10 @@ String dataPath = "/home/data/P3_cells/";
 
     private void launchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_launchButtonActionPerformed
         TreePath[] selectionPaths = volumeTree.getSelectionPaths();
-        File[] cellDirectories = new File[selectionPaths.length];
+        File[] cellDirectories = new File[selectionPaths.length]; //Null pointer here if nothing is clicked
         for (int i = 0; i < cellDirectories.length; i++){
             DefaultMutableTreeNode selectedNode = new DefaultMutableTreeNode(selectionPaths[i].getLastPathComponent());
-            
+           
             String x = selectedNode.getUserObject().toString();
             
             x = dataPath +x + '/';
@@ -211,6 +212,7 @@ String dataPath = "/home/data/P3_cells/";
         volumeTree.setModel(model);
         volumeTree.setSelectionModel(new DefaultTreeSelectionModel());
         volumeTree.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION); 
+        volumeTree.setUI(new CustomTreeUI());
         
     }
     
