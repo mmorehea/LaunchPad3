@@ -1,0 +1,344 @@
+<?xml version="1.0"?>
+ <GLOBAL>
+
+   <!--Background g="0.6" a=".5" r=".6" b=".6"/-->
+   <Background g="0.239215686" a="0.5" r="0.509803922" b="0.17647"/>
+   <Stencil value="true" />
+   <MultiThreaded value="CullDrawThreadPerContext" />
+   <!--MultiThreaded value="SingleThreaded" /-->
+   <Freeze value="true"/>
+   <SyncToVBlank value="ON" />
+   <Near value="100"/>
+   <Far value="100000000" />
+   <CullingMode value="CALVR" /> <!-- CALVR | DEFAULT -->
+   <MultiSample value="4" />
+
+   <ShowAxis value="off" />
+
+   <ConfigDebug value="false" />
+   <GeneralDebug value="true" />
+   
+   <EyeSeparation value="off"/>
+
+<Input>
+ <Threaded FPS="60.0" />
+ <TrackingSystem0 value="MOUSE">
+  <Offset x="0" y="0" z="0" />
+  <Orientation h="0" p="0" r="0" />
+  <NumBodies value="1" />
+  <NumButtons value="3" />
+  <NumValuators value="0" />
+  <Body0>
+   <Offset x="0" y="0" z="0" />
+   <Orientation h="0" p="0" r="0" />
+  </Body0>
+ </TrackingSystem0>
+
+ <NumHeads value="1" />
+ <Head0Address system="1" body="0" />
+ <NumHands value="2" />
+ <Hand0>
+  <Address system="0" body="0" />
+  <ButtonMask system0="0xFF" system1="0x00" />
+ </Hand0>
+ <Hand1>
+  <Address system="0" body="1" />
+  <ButtonMask system0="0x00" system1="0xFF" />
+  <Valuator0 system="1" number="0" type="NON_ZERO" />
+ </Hand1>
+</Input>
+	<TrackingDebug value="off" />
+	<Threaded FPS="60.0" />
+   <Plugin>
+
+    <ParticleDreams value="on">
+      <DataDir value="/home/calvr/CVRPlugins/calit2/ParticleDreams" />
+    </ParticleDreams>
+
+    <Sketch value="off" />
+    <GreenLight value="off" />
+    
+    <AndroidNavigator value="off" />
+
+    <Points value="on" >
+      <ShaderPath value="/home/calvr/CVRPlugins/calit2/Points/shaders" />
+    </Points>
+
+    <PointsWithPans value="off">
+      <Sets>
+        <GalleryTest file="/data/PointsData/gal12NdrfFilterFilt-r8.xyb" scale="1000" x="0" y="0" z="0">
+	  <KGallery1 x="0" y="0" z="0" name="KGallery1" />
+	  <KGallery2 x="0" y="1" z="0" name="KGallery2"/>
+	</GalleryTest>
+      </Sets>
+    </PointsWithPans>
+
+    <PanoViewLOD value="on">
+     <FloorOffset value="880" />
+     <ShaderDir value="/data/Pans/PansLOD/glsl/" />
+     <ImageSearchPath value="/data/Pans/PansLOD" />
+     <DefaultConfigDir value="/data/Pans/PansLOD/config/" />
+     <CacheSize value="1024" />
+     <DiskCacheSize value="4096" />
+     <ReadThreads value="1" />
+     <CopyThreads value="6" />
+     <SpinScale value="0.5" />
+     <ZoomScale value="-1.0" />
+     <Pans>
+       <Luxor>
+         <LuxorKarnakObelisks />
+         <LuxorMedinetColumnsBlueCeiling />
+         <LuxorMedinetHabuCourt />
+         <LuxorMedinetHabuRoyalTreasure1 />
+         <LuxorMedinetHabuRoyalTreasure2 />
+         <LuxorMHoutback />
+         <LuxorMHwall />
+         <LuxorRamasseum />
+         <LuxorSet />
+         <LuxorTempleChapel />
+         <LuxorTempleEntryNight />
+         <LuxorTempleNight2 />
+         <LuxorTempleOutsideColumn />
+       </Luxor>
+       <BluebonnetSet />
+       <Dr-Seuss />
+     </Pans>
+    </PanoViewLOD>
+
+    <ArtifactVis value="off" />
+    
+    <ParticleDreams value="on">
+     
+    </ParticleDreams>
+    
+     <AlgebraInMotion value="on">
+    </AlgebraInMotion>
+
+	<Obscura value="on"/>
+    <GreenLight>
+      <Components textureDir="/home/aprudhom/data/GreenLight/maps/">
+          <!-- Texture files should contain both the front and back faces, front on top-->
+          <C1 startname="convey" height="2" minWattage="620" maxWattage="690" texture="unwrap_ConveyHC1.png" />
+          <C2 startname="gpu" height="4" minWattage="233" maxWattage="493" texture="unwrap_gpuKOInVidia.png" />
+          <C3 startname="compute" height="1" minWattage="195" maxWattage="453"     texture="unwrap_pcIntelDualXeonQC5430n5440.png" />
+          <C4 startname="headnode" height="1" minWattage="198" maxWattage="289" texture="unwrap_pcIntelDualXeonQC5430n5440.png" />
+          <C5 startname="bbextreme" height="1" minWattage="68" maxWattage="102" texture="switch_unwrap.png" />
+          <C6 startname="thumper" height="4" minWattage="404" maxWattage="642" texture="unwrap_thumperSunFireX4540.png" />
+          <C7 startname="int-nehalem" height="2" minWattage="104" maxWattage="281" texture="unwrap_IntelSR2600URLXNehalem.png" />
+          <C8 startname="sun-nehalem" height="2" minWattage="60" maxWattage="350" />
+          <C9 startname="greenstar" height="2" minWattage="10000" maxWattage="10001" />
+          <Ca startname="vm" height="1" minWattage="1" maxWattage="2" />
+          <Dc startname="DC" height ="12" minWattage="1" maxWattage="2" texture="unwrap_dcmeter.png" />
+        </Components>
+        <Demo value="on" />
+        <Hardware
+          local="/home/aprudhom/data/GreenLight/GreenLightAssets.fakejson"
+          download="http://glimpse.calit2.net/beta/json-assets.php?facility=GreenLight" />
+        <ModelsDir value="/home/aprudhom/data/GreenLight/Models/" />
+        <Power
+          local="/home/aprudhom/data/GreenLight/GLpower.xml"
+          download="http://glimpse.calit2.net/beta/jmangan/bbreport.php?facility=GreenLight&amp;type=power" />
+        <Shaders
+          fragment="/home/aprudhom/data/GreenLight/shaders/component.frag"
+          vertex="/home/aprudhom/data/GreenLight/shaders/component.vert" />
+    </GreenLight>
+
+    <StructView value="off">
+		<Structure>
+			<NumLayers value="1"/>
+			<Layer0>
+				<name value=" "/>
+				<file value="/home/calvr/Downloads/p3_cells_3_5_6_7_9.obj"/>
+				<color r="138" g="138" b="138"/>
+			</Layer0>
+		</Structure>
+	</StructView>
+
+
+
+<SetView value="on">
+<Structure>
+<NumCells value="2"/>
+<Cell0>
+<NumLayers value="7"/>
+<Layer0>
+<name value="in5"/>
+<file value="/home/data/P3_cells/p3_c6parts/p3_c6_input5.obj"/>
+</Layer0>
+<Layer1>
+<name value="nucleus"/>
+<file value="/home/data/P3_cells/p3_c6parts/p3_c6_nucleus.obj"/>
+</Layer1>
+<Layer2>
+<name value="axon"/>
+<file value="/home/data/P3_cells/p3_c6parts/p3_c6_axon.obj"/>
+</Layer2>
+<Layer3>
+<name value="in2"/>
+<file value="/home/data/P3_cells/p3_c6parts/p3_c6_input2.obj"/>
+</Layer3>
+<Layer4>
+<name value="in4"/>
+<file value="/home/data/P3_cells/p3_c6parts/p3_c6_input4.obj"/>
+</Layer4>
+<Layer5>
+<name value="in1"/>
+<file value="/home/data/P3_cells/p3_c6parts/p3_c6_input1.obj"/>
+</Layer5>
+<Layer6>
+<name value="in3"/>
+<file value="/home/data/P3_cells/p3_c6parts/p3_c6_input3.obj"/>
+</Layer6>
+</Cell0>
+<Cell1>
+<NumLayers value="7"/>
+<Layer0>
+<name value="in2"/>
+<file value="/home/data/P3_cells/p3_c9parts/p3_c9_input2.obj"/>
+</Layer0>
+<Layer1>
+<name value="nucleus"/>
+<file value="/home/data/P3_cells/p3_c9parts/p3_c9_nucleus.obj"/>
+</Layer1>
+<Layer2>
+<name value="in1"/>
+<file value="/home/data/P3_cells/p3_c9parts/p3_c9_input1.obj"/>
+</Layer2>
+<Layer3>
+<name value="in4"/>
+<file value="/home/data/P3_cells/p3_c9parts/p3_c9_input4.obj"/>
+</Layer3>
+<Layer4>
+<name value="in5"/>
+<file value="/home/data/P3_cells/p3_c9parts/p3_c9_input5.obj"/>
+</Layer4>
+<Layer5>
+<name value="in3"/>
+<file value="/home/data/P3_cells/p3_c9parts/p3_c9_input3.obj"/>
+</Layer5>
+<Layer6>
+<name value="axon"/>
+<file value="/home/data/P3_cells/p3_c9parts/p3_c9_axon.obj"/>
+</Layer6>
+</Cell1>
+</Structure>
+</SetView>
+   <ArtifactVis>
+          <Database value="/home/aprudhom/data/ArtifactVis/artifactslist.txt" />
+	  <TopoFile value="/home/aprudhom/data/kyle/3d-model/Ken3dv3.wrl" />
+	  <PicFolder value="/home/covise/data/kyle/pictures/AllPics/" />
+	  <DCInfoFile value="/home/aprudhom/CVRPlugins/calit2/ArtifactVis/DCCategories.txt" />
+	  <LociFile value="/home/aprudhom/CVRPlugins/calit2/ArtifactVis/AreaMLociDepth.kml" />
+	  <ArtifactFileList value="/home/covise/data/3DArtifacts.txt" />
+	  <ArchInterfaceFolder value="/home/aprudhom/data/ArchInterface/" />
+          <MaxVisibleRange value="1000000000.0" />
+          <Offset>
+            <X value="-3396591.682" />
+            <Y value="-733458.55" />
+            <Z value="-49.44" />
+          </Offset>
+          <Site>
+            <Longitude value="35.491239" />
+            <Latitude value="30.628039" />
+            <!--Height value="0" /-->
+            <!--Scale value="1" /-->
+          </Site>
+          <Tessellation value=".2" />
+	  <ArtifactPanel x="-200" y="25" z="100" scale="1.0" />
+        </ArtifactVis>
+
+    <ModelLoader value="on" >
+      <ConfigDir value="/data/ModelLoader/" />
+      <Files>
+        <p2_bundle path="/data/p2_Large_Axons.obj" mask="0" />
+	<p3_c13 path="/home/data/baybridge/p3_c13.wrl" mask="0" />
+	<p6_c13_cellbody path="/data/p6/p6_c14_cellbody.obj" mask="0" />
+	<building_Sample path="/home/data/falko/se_building.obj" mask="0"/>
+	<bay_bridge path="/home/data/baybridge/T1Block01A_OneQuarter_StructSteel_noPiles.wrl" mask="0"/>
+	<p6_c41 path="/home/data/p6_c41.wrl" mask="0"/>
+	<p3_c3_c5 path="/home/data/p3/p3_c3_c5.wrl" mask="0"/>
+	<test path="/home/data/p3/p3_c3_c5.obj" mask="0"/>
+      </Files>                          
+    </ModelLoader>
+
+    <ImageViewer value="on" >
+      <DefaultPaths value="/home/calvr/Downloads/" />
+      <Files>
+        <BeijingCraftShop fileLeft="1.jpg" fileRight="1.jpg" />
+	<Test>
+	  <YuHuan fileLeft="2.jpg" fileRight="2.jpg" />
+	  <Test2>
+	    <TerraCottaPit fileLeft="1.jpg" fileRight="1.jpg" />
+	  </Test2>
+	</Test>
+	<Test3>
+	  <TianjinVases fileLeft="2.jpg" fileRight="2.jpg" />
+	</Test3>
+      </Files>
+    </ImageViewer>
+
+    
+    <Quit value = "off">
+    
+    </Quit>
+    
+
+    <SampleEarth value="on"> 
+    </SampleEarth>
+    <OSGEarth value="on"> 
+    </OSGEarth>
+
+   </Plugin>
+
+   <ContextMenus>
+     <Scale value="1.0" />
+     <MinDistance value="750" />
+     <MaxDistance value="1000" />
+     <DefaultOpenButton value="1" />
+   </ContextMenus>
+
+   <MenuSystem type="BOARDMENU">
+    <BoardMenu>
+     <Position distance="50" />
+     <Scale value="2.0" />
+     <Buttons select="0" open="1" />
+     <Trigger value="DOUBLECLICK" />
+    </BoardMenu>
+   </MenuSystem>
+
+   <ViewerPosition x="0" y="-1000" z="0" />
+   <SceneSize value="500" />
+
+   <NumPipes value="1" />
+   <NumWindows value="1" />
+   <NumScreens value="1" />
+
+ 
+   <PipeConfig>
+     <Pipe server="0" screen="0" name="0" />
+     <Pipe server="0" screen="1" name="1" />
+   </PipeConfig>
+
+
+   <NumChannels value="1" />
+<ChannelConfig>
+ <Channel width="1280" height="1024" left="0" bottom="0" stereoMode="LEFT"  windowIndex="0"  name="0" />
+ <Channel width="1280" height="1024" left="0" bottom="0" stereoMode="RIGHT"  windowIndex="1"  name="1" />
+</ChannelConfig>
+   
+   <WindowConfig>
+     <Window width="1280" pipeIndex="0" height="1024" left="0" bottom="0" name="0" />
+     <Window width="1280" pipeIndex="1" height="1024" left="0" bottom="0" name="1" />
+   </WindowConfig>
+
+   <NumScreens value="1" />
+<ScreenConfig>
+ <Screen width="1280" height="1024" originX="0" originY="0" originZ="0" h="0.0" p="0.0" r="0.0" name="0" />
+</ScreenConfig>
+
+
+   <MultiViewerFunction a="-0.1823784" b="-0.095493" c="1.0" />
+
+ </GLOBAL>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                               

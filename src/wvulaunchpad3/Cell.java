@@ -14,14 +14,16 @@ import java.util.ArrayList;
  */
 public class Cell {
     private ArrayList<Part> parts;
-    String dataPath = "/home/data/P3_cells/";
+    
     
     public Cell(File cellDirectory) throws IOException{
-        String dendriteRegex = "dendrite[0-9]+.obj";
+        String dendriteRegex = "dendrite1.obj";
         String inputRegex = "input[0-9]+.obj";
         parts = new ArrayList<Part>();
         File[] partFiles = cellDirectory.listFiles();
         ArrayList<File> filteredParts = new ArrayList<File>();
+        System.out.println(cellDirectory);
+        
         for (File partFile : partFiles){
             String[] strippedFileList;
             //System.out.println(justFileEnd);

@@ -1,0 +1,173 @@
+<SetView value="on">
+<Structure>
+<NumCells value="8"/>
+<Cell0>
+<NumLayers value="5"/>
+<Layer0>
+<name value="nucleus"/>
+<file value="/home/data/finalForm/p4_c15_BrianC/p4_c15_nucleus.obj"/>
+</Layer0>
+<Layer1>
+<name value="dendrite"/>
+<file value="/home/data/finalForm/p4_c15_BrianC/pe_c15_dendrite1.obj"/>
+</Layer1>
+<Layer2>
+<name value="cellbody"/>
+<file value="/home/data/finalForm/p4_c15_BrianC/p4_c15_cellbody.obj"/>
+</Layer2>
+<Layer3>
+<name value="axon"/>
+<file value="/home/data/finalForm/p4_c15_BrianC/p4_c15_axon.obj"/>
+</Layer3>
+<Layer4>
+<name value="in1"/>
+<file value="/home/data/finalForm/p4_c15_BrianC/p4_c15_input1.obj"/>
+</Layer4>
+</Cell0>
+<Cell1>
+<NumLayers value="7"/>
+<Layer0>
+<name value="in1"/>
+<file value="/home/data/finalForm/p4_c8_CodyM/p4_c8_input1.obj"/>
+</Layer0>
+<Layer1>
+<name value="in3"/>
+<file value="/home/data/finalForm/p4_c8_CodyM/p4_c8_input3.obj"/>
+</Layer1>
+<Layer2>
+<name value="in2"/>
+<file value="/home/data/finalForm/p4_c8_CodyM/p4_c8_input2.obj"/>
+</Layer2>
+<Layer3>
+<name value="cellbody"/>
+<file value="/home/data/finalForm/p4_c8_CodyM/p4_c8_cellbody.obj"/>
+</Layer3>
+<Layer4>
+<name value="in4"/>
+<file value="/home/data/finalForm/p4_c8_CodyM/p4_c8_input4.obj"/>
+</Layer4>
+<Layer5>
+<name value="in5"/>
+<file value="/home/data/finalForm/p4_c8_CodyM/p4_c8_input5.obj"/>
+</Layer5>
+<Layer6>
+<name value="nucleus"/>
+<file value="/home/data/finalForm/p4_c8_CodyM/p4_c8_nucleus.obj"/>
+</Layer6>
+</Cell1>
+<Cell2>
+<NumLayers value="2"/>
+<Layer0>
+<name value="nucleus"/>
+<file value="/home/data/finalForm/p4_c10_Glen/p4_c10_nucleus.obj"/>
+</Layer0>
+<Layer1>
+<name value="cellbody"/>
+<file value="/home/data/finalForm/p4_c10_Glen/p4_c10_cellbody.obj"/>
+</Layer1>
+</Cell2>
+<Cell3>
+<NumLayers value="4"/>
+<Layer0>
+<name value="nucleus"/>
+<file value="/home/data/finalForm/p4_c6_BrianH/p4_c6_nucleus.obj"/>
+</Layer0>
+<Layer1>
+<name value="axon"/>
+<file value="/home/data/finalForm/p4_c6_BrianH/p4_c6_axon.obj"/>
+</Layer1>
+<Layer2>
+<name value="cellbody"/>
+<file value="/home/data/finalForm/p4_c6_BrianH/p4_c6_cellbody.obj"/>
+</Layer2>
+<Layer3>
+<name value="in1"/>
+<file value="/home/data/finalForm/p4_c6_BrianH/p4_c6_input1.obj"/>
+</Layer3>
+</Cell3>
+<Cell4>
+<NumLayers value="6"/>
+<Layer0>
+<name value="cellbody"/>
+<file value="/home/data/finalForm/p4_c16_Marlin/p4_c16_cellbody.obj"/>
+</Layer0>
+<Layer1>
+<name value="axon"/>
+<file value="/home/data/finalForm/p4_c16_Marlin/p4_c16_axon.obj"/>
+</Layer1>
+<Layer2>
+<name value="nucleus"/>
+<file value="/home/data/finalForm/p4_c16_Marlin/p4_c16_nucleus.obj"/>
+</Layer2>
+<Layer3>
+<name value="in2"/>
+<file value="/home/data/finalForm/p4_c16_Marlin/p4_c16_input2.obj"/>
+</Layer3>
+<Layer4>
+<name value="in3"/>
+<file value="/home/data/finalForm/p4_c16_Marlin/p4_c16_input3.obj"/>
+</Layer4>
+<Layer5>
+<name value="in1"/>
+<file value="/home/data/finalForm/p4_c16_Marlin/p4_c16_input1.obj"/>
+</Layer5>
+</Cell4>
+<Cell5>
+<NumLayers value="3"/>
+<Layer0>
+<name value="nucleus"/>
+<file value="/home/data/finalForm/p4_c11_Marlin/p4_c11_nucleus.obj"/>
+</Layer0>
+<Layer1>
+<name value="dendrite"/>
+<file value="/home/data/finalForm/p4_c11_Marlin/p4_c11_dendrite1.obj"/>
+</Layer1>
+<Layer2>
+<name value="cellbody"/>
+<file value="/home/data/finalForm/p4_c11_Marlin/p4_c11_cellbody.obj"/>
+</Layer2>
+</Cell5>
+<Cell6>
+<NumLayers value="9"/>
+<Layer0>
+<name value="axon"/>
+<file value="/home/data/finalForm/p4_c17_marlin/p4_c17_axon.obj"/>
+</Layer0>
+<Layer1>
+<name value="in1"/>
+<file value="/home/data/finalForm/p4_c17_marlin/p4_c17_input1.obj"/>
+</Layer1>
+<Layer2>
+<name value="in2"/>
+<file value="/home/data/finalForm/p4_c17_marlin/p4_c17_input2.obj"/>
+</Layer2>
+<Layer3>
+<name value="in4"/>
+<file value="/home/data/finalForm/p4_c17_marlin/p4_c17_input4.obj"/>
+</Layer3>
+<Layer4>
+<name value="in5"/>
+<file value="/home/data/finalForm/p4_c17_marlin/p4_c17_input5.obj"/>
+</Layer4>
+<Layer5>
+<name value="in3"/>
+<file value="/home/data/finalForm/p4_c17_marlin/p4_c17_input3.obj"/>
+</Layer5>
+<Layer6>
+<name value="nucleus"/>
+<file value="/home/data/finalForm/p4_c17_marlin/p4_c17_nucleus.obj"/>
+</Layer6>
+<Layer7>
+<name value="in6"/>
+<file value="/home/data/finalForm/p4_c17_marlin/p4_c17_input6.obj"/>
+</Layer7>
+<Layer8>
+<name value="cellbody"/>
+<file value="/home/data/finalForm/p4_c17_marlin/p4_c17_cellbody.obj"/>
+</Layer8>
+</Cell6>
+<Cell7>
+<NumLayers value="0"/>
+</Cell7>
+</Structure>
+</SetView>
