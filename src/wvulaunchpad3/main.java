@@ -25,7 +25,7 @@ import javax.swing.tree.TreeSelectionModel;
 public class main extends javax.swing.JFrame {
 
     String dataPath = "/home/data/finalForm/";
-    String savedSetsDirectory = "/home/calvr/savedsets/";
+    String savedSetDirectory = "/home/calvr/savedsets/";
     /**
      * Creates new form main
      */
@@ -157,7 +157,7 @@ public class main extends javax.swing.JFrame {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         String saveName = JOptionPane.showInputDialog("Name Your Set");
-        String xmlFile = savedSetsDirectory + saveName + ".xml";
+        String xmlFile = savedSetDirectory + saveName + ".xml";
         Set set = createSetFromSelection(volumeTree.getSelectionPaths());
         try {
             new XMLWriter(set).write(xmlFile);
@@ -170,7 +170,7 @@ public class main extends javax.swing.JFrame {
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
 
-        String setPath = savedSetsDirectory + savedSetList.getSelectedValue();       
+        String setPath = savedSetDirectory + savedSetList.getSelectedValue();       
         try {
             new XMLWriter().copyOver(setPath);
         } catch (FileNotFoundException ex) {
@@ -182,7 +182,7 @@ public class main extends javax.swing.JFrame {
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
        String selectedSet = (String) savedSetList.getSelectedValue();
-       new File(savedSetsDirectory + selectedSet).delete();
+       new File(savedSetDirectory + selectedSet).delete();
        refreshSavedSetList();
     }//GEN-LAST:event_removeButtonActionPerformed
 
@@ -277,7 +277,7 @@ public class main extends javax.swing.JFrame {
         return set;
     }
     private void refreshSavedSetList() {
-        File folder = new File(savedSetsDirectory);
+        File folder = new File(savedSetDirectory);
         File[] listOfFiles = folder.listFiles();
         DefaultListModel dlm = new DefaultListModel();
         for (int i = 0; i < listOfFiles.length; i++) {
