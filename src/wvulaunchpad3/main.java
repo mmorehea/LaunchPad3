@@ -183,6 +183,7 @@ public class main extends javax.swing.JFrame {
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
        String selectedSet = (String) savedSetList.getSelectedValue();
        new File(savedSetDirectory + selectedSet).delete();
+       savedSetList.removeAll();
        refreshSavedSetList();
     }//GEN-LAST:event_removeButtonActionPerformed
 
