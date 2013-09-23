@@ -25,7 +25,7 @@ import javax.swing.tree.TreeSelectionModel;
 public class main extends javax.swing.JFrame {
 
     String dataPath = "/home/data/finalForm/";
-    String savedSets = "/home/calvr/savedsets/";
+    String savedSetDirectory = "/home/calvr/savedsets/";
     /**
      * Creates new form main
      */
@@ -49,7 +49,7 @@ public class main extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         savedSetList = new javax.swing.JList();
         saveButton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        removeButton = new javax.swing.JButton();
         launchButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -65,6 +65,7 @@ public class main extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        savedSetList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(savedSetList);
 
         saveButton.setText("Save");
@@ -74,7 +75,12 @@ public class main extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Remove");
+        removeButton.setText("Remove");
+        removeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeButtonActionPerformed(evt);
+            }
+        });
 
         launchButton.setText("Launch");
         launchButton.addActionListener(new java.awt.event.ActionListener() {
@@ -112,7 +118,7 @@ public class main extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
                     .addComponent(loadButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -125,7 +131,7 @@ public class main extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(saveButton)
-                    .addComponent(jButton2))
+                    .addComponent(removeButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -151,7 +157,7 @@ public class main extends javax.swing.JFrame {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         String saveName = JOptionPane.showInputDialog("Name Your Set");
-        String xmlFile = savedSets + saveName + ".xml";
+        String xmlFile = savedSetDirectory + saveName + ".xml";
         Set set = createSetFromSelection(volumeTree.getSelectionPaths());
         try {
             new XMLWriter(set).write(xmlFile);
@@ -163,8 +169,8 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
-        // TODO add your handling code here:
-        String setPath = savedSets + savedSetList.getSelectedValue();       
+
+        String setPath = savedSetDirectory + savedSetList.getSelectedValue();       
         try {
             new XMLWriter().copyOver(setPath);
         } catch (FileNotFoundException ex) {
@@ -173,6 +179,12 @@ public class main extends javax.swing.JFrame {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_loadButtonActionPerformed
+
+    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
+       String selectedSet = (String) savedSetList.getSelectedValue();
+       new File(savedSetDirectory + selectedSet).delete();
+       refreshSavedSetList();
+    }//GEN-LAST:event_removeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,13 +221,13 @@ public class main extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton launchButton;
     private javax.swing.JButton loadButton;
+    private javax.swing.JButton removeButton;
     private javax.swing.JButton saveButton;
     private javax.swing.JList savedSetList;
     private javax.swing.JTree volumeTree;
@@ -265,7 +277,7 @@ public class main extends javax.swing.JFrame {
         return set;
     }
     private void refreshSavedSetList() {
-        File folder = new File("/home/calvr/savedsets/");
+        File folder = new File(savedSetDirectory);
         File[] listOfFiles = folder.listFiles();
         DefaultListModel dlm = new DefaultListModel();
         for (int i = 0; i < listOfFiles.length; i++) {
