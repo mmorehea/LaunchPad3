@@ -5,9 +5,13 @@
 package wvulaunchpad3;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.ListModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultTreeSelectionModel;
@@ -19,16 +23,16 @@ import javax.swing.tree.TreeSelectionModel;
  * @author callie
  */
 public class main extends javax.swing.JFrame {
-String dataPath = "/home/data/finalForm/";
+
+    String dataPath = "/home/data/finalForm/";
+    String savedSets = "/home/calvr/savedsets/";
     /**
      * Creates new form main
      */
     public main() {
-        // System.out.println("this happened in main");
         initComponents();
         getAndSetTree();
-        jList1.removeAll();
-        
+        refreshSavedSetList();
     }
 
     /**
@@ -43,26 +47,32 @@ String dataPath = "/home/data/finalForm/";
         jScrollPane1 = new javax.swing.JScrollPane();
         volumeTree = new javax.swing.JTree();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
-        jButton1 = new javax.swing.JButton();
+        savedSetList = new javax.swing.JList();
+        saveButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         launchButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        loadButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         volumeTree.setSelectionModel(null);
         jScrollPane1.setViewportView(volumeTree);
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        savedSetList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList1);
+        jScrollPane2.setViewportView(savedSetList);
 
-        jButton1.setText("Save");
+        saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Remove");
 
@@ -77,30 +87,35 @@ String dataPath = "/home/data/finalForm/";
 
         jLabel2.setText("Saved Sets");
 
+        loadButton.setText("Load");
+        loadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(launchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                    .addComponent(loadButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,14 +124,16 @@ String dataPath = "/home/data/finalForm/";
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jButton1)
+                    .addComponent(saveButton)
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(launchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(launchButton, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                    .addComponent(loadButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -124,23 +141,38 @@ String dataPath = "/home/data/finalForm/";
     }// </editor-fold>//GEN-END:initComponents
 
     private void launchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_launchButtonActionPerformed
-        TreePath[] selectionPaths = volumeTree.getSelectionPaths();
-        File[] cellDirectories = new File[selectionPaths.length];
-        for (int i = 0; i < cellDirectories.length; i++) {
-            DefaultMutableTreeNode selectedNode = new DefaultMutableTreeNode(selectionPaths[i].getLastPathComponent());
-
-            String x = selectedNode.getUserObject().toString();
-            x = dataPath + x + '/';
-            //System.out.println(x);
-            cellDirectories[i] = new File(x);
-        }
+        Set set = createSetFromSelection(volumeTree.getSelectionPaths());
         try {
-            Set set = new Set(cellDirectories);
             new XMLWriter(set).write();
         } catch (IOException ex) {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_launchButtonActionPerformed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        String saveName = JOptionPane.showInputDialog("Name Your Set");
+        String xmlFile = savedSets + saveName + ".xml";
+        Set set = createSetFromSelection(volumeTree.getSelectionPaths());
+        try {
+            new XMLWriter(set).write(xmlFile);
+        } catch (IOException ex) {
+            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        DefaultListModel dlm = (DefaultListModel) savedSetList.getModel();
+        dlm.addElement(saveName + ".xml");
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
+        // TODO add your handling code here:
+        String setPath = savedSets + savedSetList.getSelectedValue();       
+        try {
+            new XMLWriter().copyOver(setPath);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_loadButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,36 +205,34 @@ String dataPath = "/home/data/finalForm/";
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new main().setVisible(true);
-
-
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton launchButton;
+    private javax.swing.JButton loadButton;
+    private javax.swing.JButton saveButton;
+    private javax.swing.JList savedSetList;
     private javax.swing.JTree volumeTree;
     // End of variables declaration//GEN-END:variables
-    
-    //Pattern cellPattern = Pattern.compile("p[1-9]+_c[1-9]+");
 
-        private void getAndSetTree() {
+    //Pattern cellPattern = Pattern.compile("p[1-9]+_c[1-9]+");
+    private void getAndSetTree() {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Volumes");
         recursivePopulate(root, new CellDirectory(dataPath));
         DefaultTreeModel model = new DefaultTreeModel(root);
         volumeTree.setModel(model);
         volumeTree.setSelectionModel(new DefaultTreeSelectionModel());
-        volumeTree.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION); 
-       // volumeTree.setUI(new CustomTreeUI());
-        
+        volumeTree.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
+        // volumeTree.setUI(new CustomTreeUI());
+
     }
-    
+
     private void recursivePopulate(DefaultMutableTreeNode parent, CellDirectory f) {
         DefaultMutableTreeNode cell = new DefaultMutableTreeNode(f);
         //System.out.println(cell.getUserObject());
@@ -217,5 +247,31 @@ String dataPath = "/home/data/finalForm/";
                 recursivePopulate(cell, (new CellDirectory(subFiles[i])));
             }
         }
+    }
+
+    private Set createSetFromSelection(TreePath[] selectionPaths) {
+        File[] cellDirectories = new File[selectionPaths.length];
+        for (int i = 0; i < cellDirectories.length; i++) {
+            DefaultMutableTreeNode selectedNode = new DefaultMutableTreeNode(selectionPaths[i].getLastPathComponent());
+            String directoryPath = dataPath + selectedNode.getUserObject().toString() + '/';
+            cellDirectories[i] = new File(directoryPath);
+        }
+        Set set = null;
+        try {
+            set = new Set(cellDirectories);
+        } catch (IOException ex) {
+            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return set;
+    }
+    private void refreshSavedSetList() {
+        File folder = new File("/home/calvr/savedsets/");
+        File[] listOfFiles = folder.listFiles();
+        DefaultListModel dlm = new DefaultListModel();
+        for (int i = 0; i < listOfFiles.length; i++) {
+            dlm.addElement(listOfFiles[i].getName());
+        }
+        savedSetList.setModel(dlm);
+        savedSetList.validate();
     }
 }
