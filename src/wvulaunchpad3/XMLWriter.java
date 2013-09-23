@@ -11,7 +11,26 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import java.awt.Component;
+import java.awt.PopupMenu;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.util.Properties;
 /**
  *
  * @author dom
@@ -23,37 +42,18 @@ public class XMLWriter {
         setViewXML = set.toXML();
     }
     
-    public void write(){
-        Scanner reader = null;
-        File configFile = new File("setConfig.xml");
-        if (configFile.exists()) configFile.delete();
-        try {
-            configFile.createNewFile();
-        } catch (IOException ex) {
-            Logger.getLogger(XMLWriter.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        /*
-        FileWriter writer = null;
-        try {
-            writer = new FileWriter(configFile, true);
-            reader = new Scanner(new File("/ConfigFiles/preSetViewXML.xml"));
-        } catch (IOException ex) {
-            Logger.getLogger(XMLWriter.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            while (reader.hasNext()){
-                writer.write(reader.next());
-            }
-            writer.write(setViewXML);
-            reader = new Scanner(new File("/ConfigFiles/postSetViewXML.xml"));
-            while (reader.hasNext()){
-                writer.write(reader.next());
-            }
-            writer.close();
-            reader.close();
-        } catch (IOException ex) {
-            Logger.getLogger(XMLWriter.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        */
+    public void write() throws FileNotFoundException, IOException{
+    FileWriter fw = new FileWriter("/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/middle.xml");
+            fw.write(this.setViewXML);
+    fw.close();
+    String[] params = new String [6];
+    params[0] = "python";
+    params[1] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/xmlWriter.py";
+    params[2] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/beginning.xml";
+    params[3] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/middle.xml";
+    params[4] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/end.xml";
+    params[5] = "/home/calvr/setconfig/runtimeConfig.xml";
+    Runtime.getRuntime().exec(params);
+    
     }
 }
