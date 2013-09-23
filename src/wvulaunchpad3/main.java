@@ -11,7 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import javax.swing.ListModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultTreeSelectionModel;
@@ -23,13 +22,13 @@ import javax.swing.tree.TreeSelectionModel;
  * @author callie
  */
 public class main extends javax.swing.JFrame {
-
     String dataPath = "/home/data/finalForm/";
     String savedSetDirectory = "/home/calvr/savedsets/";
     /**
      * Creates new form main
      */
     public main() {
+        this.setTitle("WVU LaunchPad");
         initComponents();
         getAndSetTree();
         refreshSavedSetList();
@@ -181,7 +180,7 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_loadButtonActionPerformed
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
-       String selectedSet = (String) savedSetList.getSelectedValue();
+       String selectedSet = (String) savedSetList.getSelectedValue(); 
        new File(savedSetDirectory + selectedSet).delete();
        savedSetList.removeAll();
        refreshSavedSetList();
@@ -213,6 +212,7 @@ public class main extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -234,7 +234,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTree volumeTree;
     // End of variables declaration//GEN-END:variables
 
-    //Pattern cellPattern = Pattern.compile("p[1-9]+_c[1-9]+");
+    
     private void getAndSetTree() {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Volumes");
         recursivePopulate(root, new CellDirectory(dataPath));
