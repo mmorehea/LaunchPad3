@@ -15,38 +15,96 @@
 
    <ShowAxis value="off" />
 
-   <ConfigDebug value="false" />
+   <ConfigDebug value="true" />
    <GeneralDebug value="true" />
    
    <EyeSeparation value="off"/>
 
-<Input>
- <Threaded FPS="60.0" />
- <TrackingSystem0 value="MOUSE">
-  <Offset x="0" y="0" z="0" />
-  <Orientation h="0" p="0" r="0" />
-  <NumBodies value="1" />
-  <NumButtons value="3" />
-  <NumValuators value="0" />
-  <Body0>
-   <Offset x="0" y="0" z="0" />
-   <Orientation h="0" p="0" r="0" />
-  </Body0>
- </TrackingSystem0>
+   <Input>
+     <TrackingDebug value="off" />	
+     <Threaded FPS="60.0" />
+     <TrackingSystem1 value="MOUSE">
+       <Offset x="0" y="0" z="0" />
+       <Orientation h="0" p="0" r="0" />
+       <NumBodies value="1" />
+       <NumButtons value="3" />
+       <NumValuators value="0" />
 
- <NumHeads value="1" />
- <Head0Address system="1" body="0" />
- <NumHands value="2" />
- <Hand0>
-  <Address system="0" body="0" />
-  <ButtonMask system0="0xFF" system1="0x00" />
- </Hand0>
- <Hand1>
-  <Address system="0" body="1" />
-  <ButtonMask system0="0x00" system1="0xFF" />
-  <Valuator0 system="1" number="0" type="NON_ZERO" />
- </Hand1>
-</Input>
+       <Body0>
+         <Offset x="0" y="0" z="0" />
+         <Orientation h="0" p="0" r="0" />
+       </Body0>
+     </TrackingSystem1>
+
+     <TrackingSystem0 value="VRPN">
+       <Offset x="0" y="0" z="-880" />
+       <Orientation h="0" p="0" r="0" />
+
+       <VRPN>
+         <Server value="DTrack@localhost" />
+       </VRPN>
+
+       <NumBodies value="2" />
+       <NumButtons value="0" />
+       <NumValuators value="0" />
+      </TrackingSystem0>
+
+     <!--TrackingSystem0 value="VRPN">
+       <Offset x="0" y="0" z="-1193" />
+       <Orientation h="0" p="0" r="0" />
+
+       <VRPN>
+         <Server value="hand@67.58.33.254" />.\ vrpn stop
+       </VRPN>
+
+       <NumBodies value="1" />
+       <NumButtons value="0" />
+       <NumValuators value="0" />
+     </TrackingSystem0>
+
+     <TrackingSystem3 value="VRPN">
+       <Offset x="0" y="0" z="-1193" />
+       <Orientation h="0" p="0" r="0" />
+
+       <VRPN>
+         <Server value="head@67.58.33.254" />
+       </VRPN>
+
+       <NumBodies value="1" />
+       <NumButtons value="0" />
+       <NumValuators value="0" />.\ vrpn stop
+     </TrackingSystem3-->
+
+     <TrackingSystem2 value="VRPN">
+       <NumBodies value="0" />
+       <NumButtons value="3" />
+       <NumValuators value="1" />
+
+       <VRPN>
+         <Server value="Device0@localhost:7701" />
+       </VRPN>
+     </TrackingSystem2>
+
+     <NumHeads value="1" />
+     <Head0Address system="0" body="0" />
+<TrackingDebug value="off" button="true" body="true" station="1" />
+     <NumHands value="2" />
+     <Hand1>
+       <Address system="1" body="0" />
+       <ButtonMask system0="0x00" system1="0xFF" system2="0x00" />
+       <Graphic value="NONE" />
+     </Hand1>
+     <Hand0>
+       <Address system="0" body="1" />
+       <ButtonMask system0="0x00" system1="0x00" system2="0xFF" />
+       <!--Graphic value="NONE" /-->
+       <NumValuators value="1" />
+       <Valuator0 system="2" index="0" />
+     </Hand0>
+
+     <NumValuators value="0" />
+     <Valuator0 station="0" number="0" />
+   </Input>
 	<TrackingDebug value="off" />
 	<Threaded FPS="60.0" />
    <Plugin>
@@ -153,6 +211,6 @@
 			</Layer0>
 		</Structure>
 	</StructView>
-
-
-
+        
+        
+        

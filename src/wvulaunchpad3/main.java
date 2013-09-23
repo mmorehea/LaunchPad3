@@ -19,7 +19,7 @@ import javax.swing.tree.TreeSelectionModel;
  * @author callie
  */
 public class main extends javax.swing.JFrame {
-String dataPath = "/home/data/P3_cells/";
+String dataPath = "/home/data/finalForm/";
     /**
      * Creates new form main
      */
@@ -131,6 +131,7 @@ String dataPath = "/home/data/P3_cells/";
 
             String x = selectedNode.getUserObject().toString();
             x = dataPath + x + '/';
+            //System.out.println(x);
             cellDirectories[i] = new File(x);
         }
         try {
@@ -193,12 +194,12 @@ String dataPath = "/home/data/P3_cells/";
 
         private void getAndSetTree() {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Volumes");
-        recursivePopulate(root, new CellDirectory("/home/data/P3_cells"));
+        recursivePopulate(root, new CellDirectory(dataPath));
         DefaultTreeModel model = new DefaultTreeModel(root);
         volumeTree.setModel(model);
         volumeTree.setSelectionModel(new DefaultTreeSelectionModel());
         volumeTree.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION); 
-        volumeTree.setUI(new CustomTreeUI());
+       // volumeTree.setUI(new CustomTreeUI());
         
     }
     
