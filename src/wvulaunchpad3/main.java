@@ -289,7 +289,6 @@ public class main extends javax.swing.JFrame {
             }
             String directoryPath = parentPath + "/";
             cellDirectories[i] = new File(directoryPath);
-            System.out.println(cellDirectories[i]);
         }
         Set set = null;
         try {
