@@ -231,11 +231,11 @@ public class main extends javax.swing.JFrame {
  * Displays the current data path and allows it to be changed.
  */
     private void DataPathMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataPathMenuActionPerformed
-        String dataPath = JOptionPane.showInputDialog("Edit Data Path", dataPath);
+        dataPath = JOptionPane.showInputDialog("Edit Data Path", dataPath);
     }//GEN-LAST:event_DataPathMenuActionPerformed
 
     private void SavedSetPathMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SavedSetPathMenuActionPerformed
-        String dataPath = JOptionPane.showInputDialog("Edit Saved Set Path", savedSetDirectory);
+        dataPath = JOptionPane.showInputDialog("Edit Saved Set Path", savedSetDirectory);
     }//GEN-LAST:event_SavedSetPathMenuActionPerformed
 
     /**
