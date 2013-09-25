@@ -236,7 +236,7 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_DataPathMenuActionPerformed
 
     private void SavedSetPathMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SavedSetPathMenuActionPerformed
-        dataPath = JOptionPane.showInputDialog("Edit Saved Set Path", savedSetDirectory);
+        savedSetDirectory = JOptionPane.showInputDialog("Edit Saved Set Path", savedSetDirectory);
     }//GEN-LAST:event_SavedSetPathMenuActionPerformed
 
     /**
