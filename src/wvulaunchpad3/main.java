@@ -298,7 +298,7 @@ public class main extends javax.swing.JFrame {
         Properties config = null;
         try {
             config = new Properties();
-            config.load(main.class.getClassLoader().getResourceAsStream("config.properties"));
+            config.load(main.class.getClassLoader().getResourceAsStream("wvulaunchpad3/config.properties"));
         } catch (IOException ex) {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }
