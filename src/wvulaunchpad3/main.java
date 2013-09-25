@@ -7,6 +7,7 @@ package wvulaunchpad3;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -30,6 +31,7 @@ public class main extends javax.swing.JFrame {
     public main() {
         this.setTitle("WVU LaunchPad");
         initComponents();
+        loadProperties();
         getAndSetTree();
         refreshSavedSetList();
     }
@@ -244,6 +246,21 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTree volumeTree;
     // End of variables declaration//GEN-END:variables
 
+    /*
+     * Initializes global property variables based on the properties file.
+     */
+    private void loadProperties(){
+        Properties config = null;
+        try {
+            config = new Properties();
+            config.load(main.class.getClassLoader().getResourceAsStream("config.properties"));
+        } catch (IOException ex) {
+            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dataPath = config.getProperty("dataPath");
+        savedSetDirectory = config.getProperty("savedSetDirectory");
+    }
+    
     /*
      * Creates a tree and populates it with the
      * file structure of the specified data path.
