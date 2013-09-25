@@ -145,6 +145,9 @@ public class main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /*
+     * Creates a Set of cells based on the currently selected tree nodes.
+     */
     private void launchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_launchButtonActionPerformed
         Set set = createSetFromSelection(volumeTree.getSelectionPaths());
         try {
@@ -153,7 +156,10 @@ public class main extends javax.swing.JFrame {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_launchButtonActionPerformed
-
+/*
+ * Creates and saves a .xml config file based on the currently selected tree nodes.
+ * The .xml file is saved to the specified save file directory.
+ */
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         String saveName = JOptionPane.showInputDialog("Name Your Set");
         String xmlFile = savedSetDirectory + saveName + ".xml";
@@ -166,7 +172,9 @@ public class main extends javax.swing.JFrame {
         DefaultListModel dlm = (DefaultListModel) savedSetList.getModel();
         dlm.addElement(saveName + ".xml");
     }//GEN-LAST:event_saveButtonActionPerformed
-
+/*
+ * Copies the saved .xml file into the default runtime config file.
+ */
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
 
         String setPath = savedSetDirectory + savedSetList.getSelectedValue();       
@@ -178,7 +186,9 @@ public class main extends javax.swing.JFrame {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_loadButtonActionPerformed
-
+/*
+ * Removes a saved set from the list and deletes its .xml file from the system.
+ */
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
        String selectedSet = (String) savedSetList.getSelectedValue(); 
        new File(savedSetDirectory + selectedSet).delete();
@@ -234,7 +244,10 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTree volumeTree;
     // End of variables declaration//GEN-END:variables
 
-    
+    /*
+     * Creates a tree and populates it with the
+     * file structure of the specified data path.
+     */
     private void getAndSetTree() {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Volumes");
         recursivePopulate(root, new CellDirectory(dataPath));
@@ -242,10 +255,11 @@ public class main extends javax.swing.JFrame {
         volumeTree.setModel(model);
         volumeTree.setSelectionModel(new DefaultTreeSelectionModel());
         volumeTree.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
-        // volumeTree.setUI(new CustomTreeUI());
-
     }
-
+    /*
+    * Recursively crawls through a directory and adds each file and folder as a
+    * node in the tree.
+    */
     private void recursivePopulate(DefaultMutableTreeNode parent, CellDirectory f) {
         DefaultMutableTreeNode cell = new DefaultMutableTreeNode(f);
         //System.out.println(cell.getUserObject());
@@ -261,7 +275,9 @@ public class main extends javax.swing.JFrame {
             }
         }
     }
-
+    /*
+     * Creates a Set of cells based on the selected nodes.
+     */
     private Set createSetFromSelection(TreePath[] selectionPaths) {
         File[] cellDirectories = new File[selectionPaths.length];
         for (int i = 0; i < cellDirectories.length; i++) {
@@ -277,6 +293,9 @@ public class main extends javax.swing.JFrame {
         }
         return set;
     }
+    /*
+     * Refreshes the list of saved sets in order to display recent changes.
+     */
     private void refreshSavedSetList() {
         File folder = new File(savedSetDirectory);
         File[] listOfFiles = folder.listFiles();
