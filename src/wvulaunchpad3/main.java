@@ -7,6 +7,7 @@ package wvulaunchpad3;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -295,10 +296,12 @@ public class main extends javax.swing.JFrame {
      * Initializes global property variables based on the properties file.
      */
     private void loadProperties(){
-        Properties config = null;
+        Properties config = new Properties();
+        
         try {
-            config = new Properties();
-            config.load(main.class.getClassLoader().getResourceAsStream("config.properties"));
+            InputStream in;
+            in = main.class.getClassLoader().getResourceAsStream("wvulaunchpad3/configuration.properties");
+            config.load(in);
         } catch (IOException ex) {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }
