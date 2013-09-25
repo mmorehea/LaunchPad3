@@ -7,6 +7,7 @@ package wvulaunchpad3;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -30,6 +31,7 @@ public class main extends javax.swing.JFrame {
     public main() {
         this.setTitle("WVU LaunchPad");
         initComponents();
+        loadProperties();
         getAndSetTree();
         refreshSavedSetList();
     }
@@ -53,6 +55,11 @@ public class main extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         loadButton = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        FileMenu = new javax.swing.JMenu();
+        PropertiesSubMenu = new javax.swing.JMenu();
+        DataPathMenu = new javax.swing.JMenuItem();
+        SavedSetPathMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,6 +105,32 @@ public class main extends javax.swing.JFrame {
                 loadButtonActionPerformed(evt);
             }
         });
+
+        FileMenu.setText("File");
+
+        PropertiesSubMenu.setText("Properties");
+
+        DataPathMenu.setText("Edit Data Path..");
+        DataPathMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DataPathMenuActionPerformed(evt);
+            }
+        });
+        PropertiesSubMenu.add(DataPathMenu);
+
+        SavedSetPathMenu.setText("Edit Saved Set Path..");
+        SavedSetPathMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SavedSetPathMenuActionPerformed(evt);
+            }
+        });
+        PropertiesSubMenu.add(SavedSetPathMenu);
+
+        FileMenu.add(PropertiesSubMenu);
+
+        jMenuBar1.add(FileMenu);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,6 +178,9 @@ public class main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /*
+     * Creates a Set of cells based on the currently selected tree nodes.
+     */
     private void launchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_launchButtonActionPerformed
         Set set = createSetFromSelection(volumeTree.getSelectionPaths());
         try {
@@ -153,7 +189,10 @@ public class main extends javax.swing.JFrame {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_launchButtonActionPerformed
-
+/*
+ * Creates and saves a .xml config file based on the currently selected tree nodes.
+ * The .xml file is saved to the specified save file directory.
+ */
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         String saveName = JOptionPane.showInputDialog("Name Your Set");
         String xmlFile = savedSetDirectory + saveName + ".xml";
@@ -166,9 +205,10 @@ public class main extends javax.swing.JFrame {
         DefaultListModel dlm = (DefaultListModel) savedSetList.getModel();
         dlm.addElement(saveName + ".xml");
     }//GEN-LAST:event_saveButtonActionPerformed
-
+/*
+ * Copies the saved .xml file into the default runtime config file.
+ */
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
-
         String setPath = savedSetDirectory + savedSetList.getSelectedValue();       
         try {
             new XMLWriter().copyOver(setPath);
@@ -178,13 +218,25 @@ public class main extends javax.swing.JFrame {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_loadButtonActionPerformed
-
+/*
+ * Removes a saved set from the list and deletes its .xml file from the system.
+ */
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
        String selectedSet = (String) savedSetList.getSelectedValue(); 
        new File(savedSetDirectory + selectedSet).delete();
        savedSetList.removeAll();
        refreshSavedSetList();
     }//GEN-LAST:event_removeButtonActionPerformed
+/*
+ * Displays the current data path and allows it to be changed.
+ */
+    private void DataPathMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataPathMenuActionPerformed
+        dataPath = JOptionPane.showInputDialog("Edit Data Path", dataPath);
+    }//GEN-LAST:event_DataPathMenuActionPerformed
+
+    private void SavedSetPathMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SavedSetPathMenuActionPerformed
+        dataPath = JOptionPane.showInputDialog("Edit Saved Set Path", savedSetDirectory);
+    }//GEN-LAST:event_SavedSetPathMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -222,8 +274,13 @@ public class main extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem DataPathMenu;
+    private javax.swing.JMenu FileMenu;
+    private javax.swing.JMenu PropertiesSubMenu;
+    private javax.swing.JMenuItem SavedSetPathMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton launchButton;
@@ -234,7 +291,25 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTree volumeTree;
     // End of variables declaration//GEN-END:variables
 
+    /*
+     * Initializes global property variables based on the properties file.
+     */
+    private void loadProperties(){
+        Properties config = null;
+        try {
+            config = new Properties();
+            config.load(main.class.getClassLoader().getResourceAsStream("config.properties"));
+        } catch (IOException ex) {
+            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dataPath = config.getProperty("dataPath");
+        savedSetDirectory = config.getProperty("savedSetDirectory");
+    }
     
+    /*
+     * Creates a tree and populates it with the
+     * file structure of the specified data path.
+     */
     private void getAndSetTree() {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(new File("/home/data/"));
         recursivePopulate(root, new CellDirectory(dataPath));
@@ -242,10 +317,11 @@ public class main extends javax.swing.JFrame {
         volumeTree.setModel(model);
         volumeTree.setSelectionModel(new DefaultTreeSelectionModel());
         volumeTree.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
-        // volumeTree.setUI(new CustomTreeUI());
-
     }
-
+    /*
+    * Recursively crawls through a directory and adds each file and folder as a
+    * node in the tree.
+    */
     private void recursivePopulate(DefaultMutableTreeNode parent, CellDirectory f) {
         DefaultMutableTreeNode cell = new DefaultMutableTreeNode(f);
         //System.out.println(cell.getUserObject());
@@ -262,7 +338,9 @@ public class main extends javax.swing.JFrame {
             }
         }
     }
-
+    /*
+     * Creates a Set of cells based on the selected nodes.
+     */
     private Set createSetFromSelection(TreePath[] selectionPaths) {
         File[] cellDirectories = new File[selectionPaths.length];
         for (int i = 0; i < cellDirectories.length; i++) {
@@ -273,7 +351,6 @@ public class main extends javax.swing.JFrame {
             }
             String directoryPath = parentPath + "/";
             cellDirectories[i] = new File(directoryPath);
-            System.out.println(cellDirectories[i]);
         }
         Set set = null;
         try {
@@ -284,6 +361,9 @@ public class main extends javax.swing.JFrame {
         }
         return set;
     }
+    /*
+     * Refreshes the list of saved sets in order to display recent changes.
+     */
     private void refreshSavedSetList() {
         File folder = new File(savedSetDirectory);
         File[] listOfFiles = folder.listFiles();
