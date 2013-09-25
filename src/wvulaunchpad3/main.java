@@ -55,6 +55,11 @@ public class main extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         loadButton = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        FileMenu = new javax.swing.JMenu();
+        PropertiesSubMenu = new javax.swing.JMenu();
+        DataPathMenu = new javax.swing.JMenuItem();
+        SavedSetPathMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -100,6 +105,32 @@ public class main extends javax.swing.JFrame {
                 loadButtonActionPerformed(evt);
             }
         });
+
+        FileMenu.setText("File");
+
+        PropertiesSubMenu.setText("Properties");
+
+        DataPathMenu.setText("Edit Data Path..");
+        DataPathMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DataPathMenuActionPerformed(evt);
+            }
+        });
+        PropertiesSubMenu.add(DataPathMenu);
+
+        SavedSetPathMenu.setText("Edit Saved Set Path..");
+        SavedSetPathMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SavedSetPathMenuActionPerformed(evt);
+            }
+        });
+        PropertiesSubMenu.add(SavedSetPathMenu);
+
+        FileMenu.add(PropertiesSubMenu);
+
+        jMenuBar1.add(FileMenu);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -178,7 +209,6 @@ public class main extends javax.swing.JFrame {
  * Copies the saved .xml file into the default runtime config file.
  */
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
-
         String setPath = savedSetDirectory + savedSetList.getSelectedValue();       
         try {
             new XMLWriter().copyOver(setPath);
@@ -197,6 +227,16 @@ public class main extends javax.swing.JFrame {
        savedSetList.removeAll();
        refreshSavedSetList();
     }//GEN-LAST:event_removeButtonActionPerformed
+/*
+ * Displays the current data path and allows it to be changed.
+ */
+    private void DataPathMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataPathMenuActionPerformed
+        String dataPath = JOptionPane.showInputDialog("Edit Data Path", dataPath);
+    }//GEN-LAST:event_DataPathMenuActionPerformed
+
+    private void SavedSetPathMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SavedSetPathMenuActionPerformed
+        String dataPath = JOptionPane.showInputDialog("Edit Saved Set Path", savedSetDirectory);
+    }//GEN-LAST:event_SavedSetPathMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -234,8 +274,13 @@ public class main extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem DataPathMenu;
+    private javax.swing.JMenu FileMenu;
+    private javax.swing.JMenu PropertiesSubMenu;
+    private javax.swing.JMenuItem SavedSetPathMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton launchButton;
