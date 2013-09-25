@@ -25,24 +25,10 @@
     <ModelLoader value="on" >
       <ConfigDir value="/data/ModelLoader/" />
       <Files>
-        <p2_bundle path="/data/p2_Large_Axons.obj" mask="0" />
-	<p3_c13 path="/home/data/baybridge/p3_c13.wrl" mask="0" />
-	<p6_c13_cellbody path="/data/p6/p6_c14_cellbody.obj" mask="0" />
-	<building_Sample path="/home/data/falko/se_building.obj" mask="0"/>
-	<bay_bridge path="/home/data/baybridge/T1Block01A_OneQuarter_StructSteel_noPiles.wrl" mask="0"/>
-	<p6_c41 path="/home/data/p6_c41.wrl" mask="0"/>
-	<p3_c3_c5 path="/home/data/p3/p3_c3_c5.wrl" mask="0"/>
-	<test path="/home/data/p3/p3_c3_c5.obj" mask="0"/>
-	<p2_c40 path="/home/data/jessCody/p2_c40.obj" mask ="0"/>
-	<p2_c41 path="/home/data/jessCody/p2_c41.obj" mask ="0"/>
-	<p3_c1 path="/home/data/jessCody/p3_c1.obj" mask ="0"/>
-	<p3_c32 path="/home/data/jessCody/p3_c32.obj" mask ="0"/>
-	<p4_c10 path="/home/data/jessCody/p4_c10.obj" mask ="0"/>
-	<p6_c18 path="/home/data/jessCody/p6_c18.obj" mask ="0"/>
-	<p6_c31 path="/home/data/jessCody/p6_c31.obj" mask ="0"/>
-	<p9_c27 path="/home/data/jessCody/p9_c27.obj" mask ="0"/>
-	<p2_c44 path="/home/data/jessCody/p2_c44.obj" mask ="0"/>
-	      
+        <p4_c41 path="/home/data/p4_c41.wrl" mask="0" />
+        <R10 path="/home/calvr/fromCallie/p4_c41_R10.obj" mask="0" />
+	<R20 path="/home/calvr/fromCallie/p4_c41_R20.obj" mask="0" />
+        <R50 path="/home/calvr/fromCallie/p4_c41_R50.obj" mask="0" />      
 	</Files>                          
     </ModelLoader>
 

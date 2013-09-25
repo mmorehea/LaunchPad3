@@ -22,7 +22,7 @@ import javax.swing.tree.TreeSelectionModel;
  * @author callie
  */
 public class main extends javax.swing.JFrame {
-    String dataPath = "/home/data/finalForm/";
+    String dataPath = "/home/data/Volumes/";
     String savedSetDirectory = "/home/calvr/savedsets/";
     /**
      * Creates new form main
@@ -249,7 +249,7 @@ public class main extends javax.swing.JFrame {
      * file structure of the specified data path.
      */
     private void getAndSetTree() {
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Volumes");
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode(new File("/home/data/"));
         recursivePopulate(root, new CellDirectory(dataPath));
         DefaultTreeModel model = new DefaultTreeModel(root);
         volumeTree.setModel(model);
@@ -263,10 +263,11 @@ public class main extends javax.swing.JFrame {
     private void recursivePopulate(DefaultMutableTreeNode parent, CellDirectory f) {
         DefaultMutableTreeNode cell = new DefaultMutableTreeNode(f);
         //System.out.println(cell.getUserObject());
+        
         parent.add(cell); //If we only want directories, put this line inside subsequent if statement
 
         if (f.isDirectory()) {
-
+          
             File[] subFiles = f.listFiles();
 
             //---Recurse through all sub directories/files
@@ -282,11 +283,17 @@ public class main extends javax.swing.JFrame {
         File[] cellDirectories = new File[selectionPaths.length];
         for (int i = 0; i < cellDirectories.length; i++) {
             DefaultMutableTreeNode selectedNode = new DefaultMutableTreeNode(selectionPaths[i].getLastPathComponent());
-            String directoryPath = dataPath + selectedNode.getUserObject().toString() + '/';
+            String parentPath = "";
+            for (int j = 0; j < selectionPaths[i].getPathCount(); j++) {
+                parentPath = parentPath + "/" + selectionPaths[i].getPathComponent(j);
+            }
+            String directoryPath = parentPath + "/";
             cellDirectories[i] = new File(directoryPath);
+            System.out.println(cellDirectories[i]);
         }
         Set set = null;
         try {
+            System.out.println(cellDirectories);
             set = new Set(cellDirectories);
         } catch (IOException ex) {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
