@@ -64,7 +64,6 @@ public class XMLWriter {
         params[5] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/end.xml";
         params[6] = specifiedFilePath;
         Runtime.getRuntime().exec(params);
-
     }
     
     public void copyOver(String specifiedFilePath) throws FileNotFoundException, IOException {
@@ -77,6 +76,5 @@ public class XMLWriter {
         params[4] = specifiedFilePath;
         params[5] = "/home/calvr/setconfig/runtimeConfig.xml";
         Runtime.getRuntime().exec(params);
-
     }
 }

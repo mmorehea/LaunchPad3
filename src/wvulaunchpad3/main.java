@@ -57,7 +57,7 @@ public class main extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         loadButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        savedSetDescription = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         FileMenu = new javax.swing.JMenu();
@@ -76,6 +76,11 @@ public class main extends javax.swing.JFrame {
             public Object getElementAt(int i) { return strings[i]; }
         });
         savedSetList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        savedSetList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                savedSetListValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(savedSetList);
 
         saveButton.setText("Save");
@@ -110,9 +115,9 @@ public class main extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
+        savedSetDescription.setColumns(20);
+        savedSetDescription.setRows(5);
+        jScrollPane3.setViewportView(savedSetDescription);
 
         jLabel3.setText("Saved Set Info");
 
@@ -260,6 +265,13 @@ public class main extends javax.swing.JFrame {
         savedSetDirectory = JOptionPane.showInputDialog("Edit Saved Set Path", savedSetDirectory);
     }//GEN-LAST:event_SavedSetPathMenuActionPerformed
 
+    private void savedSetListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_savedSetListValueChanged
+        String description;
+        File xml = new File(savedSetDirectory + savedSetList.getSelectedValue());
+        description = new SaxParser(xml).parseDocument();
+        savedSetDescription.setText(description);
+    }//GEN-LAST:event_savedSetListValueChanged
+
     /**
      * @param args the command line arguments
      */
@@ -307,11 +319,11 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton launchButton;
     private javax.swing.JButton loadButton;
     private javax.swing.JButton removeButton;
     private javax.swing.JButton saveButton;
+    private javax.swing.JTextArea savedSetDescription;
     private javax.swing.JList savedSetList;
     private javax.swing.JTree volumeTree;
     // End of variables declaration//GEN-END:variables
