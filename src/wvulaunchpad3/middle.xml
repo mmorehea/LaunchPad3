@@ -1,112 +1,12 @@
 <SetView value="on">
 <Structure>
-<NumCells value="5"/>
+<NumCells value="1"/>
 <Cell0>
-<NumLayers value="2"/>
-<Layer0>
-<name value="dendrite"/>
-<file value="/home/data/Volumes/P4/Reduced/p4_c14_Marlin_R/p4_c14_dendrite1.obj"/>
-</Layer0>
-<Layer1>
-<name value="cellbody"/>
-<file value="/home/data/Volumes/P4/Reduced/p4_c14_Marlin_R/p4_c14_cellbody.obj"/>
-</Layer1>
-</Cell0>
-<Cell1>
 <NumLayers value="1"/>
 <Layer0>
-<name value="cellbody"/>
-<file value="/home/data/Volumes/P4/Reduced/p4_c18_Reema_R/p4_c18_cellbody.obj"/>
+<name value="dendrite"/>
+<file value="/home/data/Volumes/P2/p2_c45_RyanR2/p2_c45_dendrite1.obj"/>
 </Layer0>
-</Cell1>
-<Cell2>
-<NumLayers value="4"/>
-<Layer0>
-<name value="nucleus"/>
-<file value="/home/data/Volumes/P4/Reduced/p4_c6_BrianH_R/p4_c6_nucleus.obj"/>
-</Layer0>
-<Layer1>
-<name value="axon"/>
-<file value="/home/data/Volumes/P4/Reduced/p4_c6_BrianH_R/p4_c6_axon.obj"/>
-</Layer1>
-<Layer2>
-<name value="cellbody"/>
-<file value="/home/data/Volumes/P4/Reduced/p4_c6_BrianH_R/p4_c6_cellbody.obj"/>
-</Layer2>
-<Layer3>
-<name value="in1"/>
-<file value="/home/data/Volumes/P4/Reduced/p4_c6_BrianH_R/p4_c6_input1.obj"/>
-</Layer3>
-</Cell2>
-<Cell3>
-<NumLayers value="9"/>
-<Layer0>
-<name value="axon"/>
-<file value="/home/data/Volumes/P4/Reduced/p4_c17_marlin_R/p4_c17_axon.obj"/>
-</Layer0>
-<Layer1>
-<name value="in1"/>
-<file value="/home/data/Volumes/P4/Reduced/p4_c17_marlin_R/p4_c17_input1.obj"/>
-</Layer1>
-<Layer2>
-<name value="in2"/>
-<file value="/home/data/Volumes/P4/Reduced/p4_c17_marlin_R/p4_c17_input2.obj"/>
-</Layer2>
-<Layer3>
-<name value="in4"/>
-<file value="/home/data/Volumes/P4/Reduced/p4_c17_marlin_R/p4_c17_input4.obj"/>
-</Layer3>
-<Layer4>
-<name value="in5"/>
-<file value="/home/data/Volumes/P4/Reduced/p4_c17_marlin_R/p4_c17_input5.obj"/>
-</Layer4>
-<Layer5>
-<name value="in3"/>
-<file value="/home/data/Volumes/P4/Reduced/p4_c17_marlin_R/p4_c17_input3.obj"/>
-</Layer5>
-<Layer6>
-<name value="nucleus"/>
-<file value="/home/data/Volumes/P4/Reduced/p4_c17_marlin_R/p4_c17_nucleus.obj"/>
-</Layer6>
-<Layer7>
-<name value="in6"/>
-<file value="/home/data/Volumes/P4/Reduced/p4_c17_marlin_R/p4_c17_input6.obj"/>
-</Layer7>
-<Layer8>
-<name value="cellbody"/>
-<file value="/home/data/Volumes/P4/Reduced/p4_c17_marlin_R/p4_c17_cellbody.obj"/>
-</Layer8>
-</Cell3>
-<Cell4>
-<NumLayers value="7"/>
-<Layer0>
-<name value="in1"/>
-<file value="/home/data/Volumes/P4/Reduced/p4_c8_CodyM_R/p4_c8_input1.obj"/>
-</Layer0>
-<Layer1>
-<name value="in3"/>
-<file value="/home/data/Volumes/P4/Reduced/p4_c8_CodyM_R/p4_c8_input3.obj"/>
-</Layer1>
-<Layer2>
-<name value="in2"/>
-<file value="/home/data/Volumes/P4/Reduced/p4_c8_CodyM_R/p4_c8_input2.obj"/>
-</Layer2>
-<Layer3>
-<name value="cellbody"/>
-<file value="/home/data/Volumes/P4/Reduced/p4_c8_CodyM_R/p4_c8_cellbody.obj"/>
-</Layer3>
-<Layer4>
-<name value="in4"/>
-<file value="/home/data/Volumes/P4/Reduced/p4_c8_CodyM_R/p4_c8_input4.obj"/>
-</Layer4>
-<Layer5>
-<name value="in5"/>
-<file value="/home/data/Volumes/P4/Reduced/p4_c8_CodyM_R/p4_c8_input5.obj"/>
-</Layer5>
-<Layer6>
-<name value="nucleus"/>
-<file value="/home/data/Volumes/P4/Reduced/p4_c8_CodyM_R/p4_c8_nucleus.obj"/>
-</Layer6>
-</Cell4>
+</Cell0>
 </Structure>
 </SetView>
