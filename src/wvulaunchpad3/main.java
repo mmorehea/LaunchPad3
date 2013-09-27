@@ -24,8 +24,8 @@ import javax.swing.tree.TreeSelectionModel;
  * @author callie
  */
 public class main extends javax.swing.JFrame {
-    String dataPath = "/home/data/Volumes/";
-    String savedSetDirectory = "/home/calvr/savedsets/";
+    String dataPath;
+    String savedSetDirectory;
     /**
      * Creates new form main
      */
