@@ -3,23 +3,27 @@
 import sys
 import os
 
-beginning = sys.argv[1]
-middle = sys.argv[2]
-end = sys.argv[3]
-new = sys.argv[4]
+description = sys.argv[1]
+beginning = sys.argv[2]
+middle = sys.argv[3]
+end = sys.argv[4]
+new = sys.argv[5]
 
+description = open(description, 'r')
 beginningFile = open(beginning,'r')
 middle = open(middle,'r')
 end = open(end,'r')
 new = open(new,'w')
 
-for line1 in beginningFile:
+for line1 in description:
     new.write(line1)
 
-for line2 in middle:
+for line2 in beginningFile:
     new.write(line2)
-    print line2
 
-for line3 in end:
+for line3 in middle:
     new.write(line3)
+
+for line4 in end:
+    new.write(line4)
 

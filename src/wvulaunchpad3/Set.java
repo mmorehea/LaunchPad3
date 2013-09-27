@@ -14,12 +14,24 @@ import java.util.ArrayList;
  */
 public class Set {
     private ArrayList<Cell> cells;
+    private String description;
     
     public Set(File[] cellDirectories) throws IOException{
         cells = new ArrayList<Cell>();
         for (File cellDirectory : cellDirectories){
             cells.add(new Cell(cellDirectory));
         }
+    }
+    
+    public void setDescription(String desc){
+        description = desc;
+    }
+    public String getDescription(){
+        return description;
+    }
+    
+    public ArrayList<Cell> getCells(){
+        return cells;
     }
     
     public String toXML(){
