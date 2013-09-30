@@ -213,11 +213,16 @@ public class main extends javax.swing.JFrame {
      * Creates a Set of cells based on the currently selected tree nodes.
      */
     private void launchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_launchButtonActionPerformed
-        Set set = createSetFromSelection(volumeTree.getSelectionPaths());
+        Set set = null;
+        try {
+            set = createSetFromSelection(volumeTree.getSelectionPaths());
+        } catch (GeneralException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
         try {
             new XMLWriter(set).write();
         } catch (IOException ex) {
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, "Error writing xml file.");
         }
     }//GEN-LAST:event_launchButtonActionPerformed
     /*
@@ -228,13 +233,17 @@ public class main extends javax.swing.JFrame {
         String saveName = JOptionPane.showInputDialog("Name Your Set");
         String description = JOptionPane.showInputDialog("Describe your set");
         String xmlFile = savedSetDirectory + saveName + ".xml";
-        System.out.println(volumeTree.getSelectionPaths());
-        Set set = createSetFromSelection(volumeTree.getSelectionPaths());
+        Set set = null;
+        try {
+            set = createSetFromSelection(volumeTree.getSelectionPaths());
+        } catch (GeneralException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
         set.setDescription(description);
         try {
             new XMLWriter(set).write(xmlFile);
         } catch (IOException ex) {
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, "Error writing xml file.");
         }
         DefaultListModel dlm = (DefaultListModel) savedSetList.getModel();
         dlm.addElement(saveName + ".xml");
@@ -247,9 +256,9 @@ public class main extends javax.swing.JFrame {
         try {
             new XMLWriter().copyOver(setPath);
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, "File not found error.");
         } catch (IOException ex) {
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, "Error writing xml file.");
         }
     }//GEN-LAST:event_loadButtonActionPerformed
     /*
@@ -266,24 +275,28 @@ public class main extends javax.swing.JFrame {
      */
     private void DataPathMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataPathMenuActionPerformed
         dataPath = JOptionPane.showInputDialog("Edit Data Path", dataPath);
-        if (!dataPath.endsWith("/")) {
-            dataPath += "/";
+        if (!dataPath.endsWith("/")) dataPath += "/";
+        try {
+            editProperties("dataPath", dataPath);
+        } catch (GeneralException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         }
-        editProperties("dataPath", dataPath);
         getAndSetTree();
     }//GEN-LAST:event_DataPathMenuActionPerformed
 
     private void SavedSetPathMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SavedSetPathMenuActionPerformed
         savedSetDirectory = JOptionPane.showInputDialog("Edit Saved Set Path", savedSetDirectory);
-        if (!savedSetDirectory.endsWith("/")) {
-            savedSetDirectory += "/";
+        if (!savedSetDirectory.endsWith("/")) savedSetDirectory += "/";
+        try {
+            editProperties("savedSetDirectory", savedSetDirectory);
+        } catch (GeneralException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         }
-        editProperties("savedSetDirectory", savedSetDirectory);
         refreshSavedSetList();
 
     }//GEN-LAST:event_SavedSetPathMenuActionPerformed
 
-    private void editProperties(String key, String value) {
+    private void editProperties(String key, String value) throws GeneralException{
         Properties config = new Properties();
         try {
             InputStream in;
@@ -296,9 +309,9 @@ public class main extends javax.swing.JFrame {
             out.close();
 
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+            throw new GeneralException("Error locating properties file.");
         } catch (IOException ex) {
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+            throw new GeneralException("Error accessing properties file.");
         }
 
     }
@@ -395,7 +408,7 @@ public class main extends javax.swing.JFrame {
      * file structure of the specified data path.
      */
     private void getAndSetTree() {
-        CellDirectory dataDirectory = new CellDirectory(dataPath);
+        File dataDirectory = new File(dataPath);
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(dataDirectory);
         for (File file : dataDirectory.listFiles()) {
             recursivePopulate(root, new CellDirectory(file));
@@ -415,7 +428,6 @@ public class main extends javax.swing.JFrame {
         DefaultMutableTreeNode cell = new DefaultMutableTreeNode(f);
 
         parent.add(cell); //If we only want directories, put this line inside subsequent if statement
-
         if (f.isDirectory()) {
 
             File[] subFiles = f.listFiles();
@@ -429,25 +441,16 @@ public class main extends javax.swing.JFrame {
     /*
      * Creates a Set of cells based on the selected nodes.
      */
-
-    private Set createSetFromSelection(TreePath[] selectionPaths) {
+    private Set createSetFromSelection(TreePath[] selectionPaths) throws GeneralException {
         File[] cellDirectories = new File[selectionPaths.length];
         for (int i = 0; i < cellDirectories.length; i++) {
-            DefaultMutableTreeNode selectedNode = new DefaultMutableTreeNode(selectionPaths[i].getLastPathComponent());
-            String parentPath = "";
+            String directoryPath = "";
             for (int j = 0; j < selectionPaths[i].getPathCount(); j++) {
-                parentPath = parentPath + "/" + selectionPaths[i].getPathComponent(j);
+                directoryPath += selectionPaths[i].getPathComponent(j) + "/";
             }
-            String directoryPath = parentPath + "/";
             cellDirectories[i] = new File(directoryPath);
         }
-        Set set = null;
-        try {
-            System.out.println(cellDirectories);
-            set = new Set(cellDirectories);
-        } catch (IOException ex) {
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Set set = new Set(cellDirectories);
         return set;
     }
     /*
