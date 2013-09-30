@@ -5,12 +5,10 @@
 package wvulaunchpad3;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,7 +35,7 @@ public class main extends javax.swing.JFrame {
         initComponents();
         loadProperties();
         getAndSetTree();
-        //refreshSavedSetList();
+        refreshSavedSetList();
     }
 
     /**
@@ -262,13 +260,14 @@ public class main extends javax.swing.JFrame {
  */
     private void DataPathMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataPathMenuActionPerformed
         dataPath = JOptionPane.showInputDialog("Edit Data Path", dataPath);
+        if (!dataPath.endsWith("/")) dataPath += "/";
         editProperties("dataPath", dataPath);
         getAndSetTree();
     }//GEN-LAST:event_DataPathMenuActionPerformed
 
     private void SavedSetPathMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SavedSetPathMenuActionPerformed
-       
         savedSetDirectory = JOptionPane.showInputDialog("Edit Saved Set Path", savedSetDirectory);
+        if (!savedSetDirectory.endsWith("/")) savedSetDirectory += "/";
         editProperties("savedSetDirectory", savedSetDirectory);
         refreshSavedSetList();
         

@@ -47,7 +47,6 @@ public class XMLWriter {
         for (Cell cell : cells){
             description += cell.getName() + "\n";
         }
-        System.out.println(description);
         FileWriter fw = new FileWriter("/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/description.xml");
         fw.write("<desc>\n");
         fw.write(description);
