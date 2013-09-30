@@ -35,12 +35,11 @@ public class Part {
             return xml;
             
         }
-               else if (type.matches(dendriteRegex)){
+        else if (type.matches(dendriteRegex)){
             String t = type.replaceAll(dendriteRegex, dend);
             String xml = "<name value=\""+t+"\"/>\n";
             xml += "<file value=\""+filePath+"\"/>\n";
             return xml;
-            
         }
         else {
         String xml = "<name value=\""+type+"\"/>\n";
