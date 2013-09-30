@@ -34,7 +34,7 @@ public class main extends javax.swing.JFrame {
         initComponents();
         loadProperties();
         getAndSetTree();
-        refreshSavedSetList();
+        //refreshSavedSetList();
     }
 
     /**
@@ -259,10 +259,12 @@ public class main extends javax.swing.JFrame {
  */
     private void DataPathMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataPathMenuActionPerformed
         dataPath = JOptionPane.showInputDialog("Edit Data Path", dataPath);
+        if (!dataPath.endsWith("/")) dataPath += "/";
     }//GEN-LAST:event_DataPathMenuActionPerformed
 
     private void SavedSetPathMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SavedSetPathMenuActionPerformed
         savedSetDirectory = JOptionPane.showInputDialog("Edit Saved Set Path", savedSetDirectory);
+        if (!savedSetDirectory.endsWith("/")) savedSetDirectory += "/";
     }//GEN-LAST:event_SavedSetPathMenuActionPerformed
 
     private void savedSetListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_savedSetListValueChanged
@@ -350,20 +352,25 @@ public class main extends javax.swing.JFrame {
      * file structure of the specified data path.
      */
     private void getAndSetTree() {
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode(new File("/home/data/"));
-        recursivePopulate(root, new CellDirectory(dataPath));
+        CellDirectory dataDirectory = new CellDirectory(dataPath);
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode(dataDirectory);
+        for (File file : dataDirectory.listFiles()){
+            recursivePopulate(root, new CellDirectory(file));
+        }
         DefaultTreeModel model = new DefaultTreeModel(root);
         volumeTree.setModel(model);
         volumeTree.setSelectionModel(new DefaultTreeSelectionModel());
         volumeTree.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
     }
+    
+    
     /*
     * Recursively crawls through a directory and adds each file and folder as a
     * node in the tree.
     */
     private void recursivePopulate(DefaultMutableTreeNode parent, CellDirectory f) {
+        
         DefaultMutableTreeNode cell = new DefaultMutableTreeNode(f);
-        //System.out.println(cell.getUserObject());
         
         parent.add(cell); //If we only want directories, put this line inside subsequent if statement
 
