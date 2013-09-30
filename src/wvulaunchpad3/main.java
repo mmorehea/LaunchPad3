@@ -315,10 +315,6 @@ public class main extends javax.swing.JFrame {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
-
-
-
     }//GEN-LAST:event_savedSetListValueChanged
 
     /**
