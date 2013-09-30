@@ -419,9 +419,7 @@ public class main extends javax.swing.JFrame {
             String directoryPath = "";
             for (int j = 0; j < selectionPaths[i].getPathCount(); j++) {
                 directoryPath += selectionPaths[i].getPathComponent(j) + "/";
-                System.out.println("parent path: " + directoryPath);
             }
-            System.out.println("directory path: " + directoryPath);
             cellDirectories[i] = new File(directoryPath);
         }
         Set set = null;
