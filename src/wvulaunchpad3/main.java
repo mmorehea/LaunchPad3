@@ -378,7 +378,7 @@ public class main extends javax.swing.JFrame {
      * file structure of the specified data path.
      */
     private void getAndSetTree() {
-        CellDirectory dataDirectory = new CellDirectory(dataPath);
+        File dataDirectory = new File(dataPath);
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(dataDirectory);
         for (File file : dataDirectory.listFiles()){
             recursivePopulate(root, new CellDirectory(file));
@@ -416,12 +416,12 @@ public class main extends javax.swing.JFrame {
     private Set createSetFromSelection(TreePath[] selectionPaths) {
         File[] cellDirectories = new File[selectionPaths.length];
         for (int i = 0; i < cellDirectories.length; i++) {
-            DefaultMutableTreeNode selectedNode = new DefaultMutableTreeNode(selectionPaths[i].getLastPathComponent());
-            String parentPath = "";
+            String directoryPath = "";
             for (int j = 0; j < selectionPaths[i].getPathCount(); j++) {
-                parentPath = parentPath + "/" + selectionPaths[i].getPathComponent(j);
+                directoryPath += selectionPaths[i].getPathComponent(j) + "/";
+                System.out.println("parent path: " + directoryPath);
             }
-            String directoryPath = parentPath + "/";
+            System.out.println("directory path: " + directoryPath);
             cellDirectories[i] = new File(directoryPath);
         }
         Set set = null;
