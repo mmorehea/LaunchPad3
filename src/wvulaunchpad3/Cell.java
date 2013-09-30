@@ -14,9 +14,11 @@ import java.util.ArrayList;
  */
 public class Cell {
     private ArrayList<Part> parts;
+    private String name;
     
     
     public Cell(File cellDirectory) throws IOException{
+        name = cellDirectory.toString();
         String dendriteRegex = "dendrite1.obj";
         String inputRegex = "input[0-9]+.obj";
         parts = new ArrayList<Part>();
@@ -45,6 +47,10 @@ public class Cell {
             
         }
         
+    }
+    
+    public String getName(){
+        return name;
     }
     
     public String toXML(){

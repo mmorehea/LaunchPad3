@@ -32,7 +32,7 @@ public class XMLWriter {
         fw.close();
         String[] params = new String[6];
         params[0] = "python";
-        params[1] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/xmlWriter.py";
+        params[1] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/xmlWriterNoDesc.py";
         params[2] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/beginning.xml";
         params[3] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/middle.xml";
         params[4] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/end.xml";
@@ -45,8 +45,9 @@ public class XMLWriter {
         description += "Cells:\n";
         ArrayList<Cell> cells = set.getCells();
         for (Cell cell : cells){
-            description += cell + "\n";
+            description += cell.getName() + "\n";
         }
+        System.out.println(description);
         FileWriter fw = new FileWriter("/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/description.xml");
         fw.write("<desc>\n");
         fw.write(description);
@@ -55,7 +56,7 @@ public class XMLWriter {
         fw = new FileWriter("/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/middle.xml");
         fw.write(this.setViewXML);
         fw.close();
-        String[] params = new String[6];
+        String[] params = new String[7];
         params[0] = "python";
         params[1] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/xmlWriter.py";
         params[2] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/description.xml";
