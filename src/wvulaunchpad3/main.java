@@ -5,9 +5,12 @@
 package wvulaunchpad3;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -259,12 +262,38 @@ public class main extends javax.swing.JFrame {
  */
     private void DataPathMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataPathMenuActionPerformed
         dataPath = JOptionPane.showInputDialog("Edit Data Path", dataPath);
+        editProperties("dataPath", dataPath);
+        getAndSetTree();
     }//GEN-LAST:event_DataPathMenuActionPerformed
 
     private void SavedSetPathMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SavedSetPathMenuActionPerformed
+       
         savedSetDirectory = JOptionPane.showInputDialog("Edit Saved Set Path", savedSetDirectory);
+        editProperties("savedSetDirectory", savedSetDirectory);
+        refreshSavedSetList();
+        
     }//GEN-LAST:event_SavedSetPathMenuActionPerformed
 
+    private void editProperties(String key, String value){
+        Properties config = new Properties();
+        try {
+            InputStream in;
+            in = main.class.getClassLoader().getResourceAsStream("wvulaunchpad3/configuration.properties");
+            config.load(in);
+            in.close();
+            FileOutputStream out = new FileOutputStream(main.class.getClassLoader().getResource("wvulaunchpad3/configuration.properties").toString().substring(5));
+            config.setProperty(key, value);
+            config.store(out, null);
+            out.close();
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
     private void savedSetListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_savedSetListValueChanged
         String description;
         File xml = new File(savedSetDirectory + savedSetList.getSelectedValue());
@@ -350,7 +379,7 @@ public class main extends javax.swing.JFrame {
      * file structure of the specified data path.
      */
     private void getAndSetTree() {
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode(new File("/home/data/"));
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode(new File(dataPath));
         recursivePopulate(root, new CellDirectory(dataPath));
         DefaultTreeModel model = new DefaultTreeModel(root);
         volumeTree.setModel(model);
@@ -362,10 +391,16 @@ public class main extends javax.swing.JFrame {
     * node in the tree.
     */
     private void recursivePopulate(DefaultMutableTreeNode parent, CellDirectory f) {
-        DefaultMutableTreeNode cell = new DefaultMutableTreeNode(f);
-        //System.out.println(cell.getUserObject());
-        
-        parent.add(cell); //If we only want directories, put this line inside subsequent if statement
+        DefaultMutableTreeNode cell;
+        if ((f.getPath().equals(dataPath) ) || (f.getPath().equals(dataPath.substring(0,dataPath.length()-1)))){
+           
+           cell = parent;
+        }
+        else {
+           cell = new DefaultMutableTreeNode(f); 
+           parent.add(cell);
+        }
+         //If we only want directories, put this line inside subsequent if statement
 
         if (f.isDirectory()) {
           
@@ -408,6 +443,7 @@ public class main extends javax.swing.JFrame {
         File[] listOfFiles = folder.listFiles();
         DefaultListModel dlm = new DefaultListModel();
         for (int i = 0; i < listOfFiles.length; i++) {
+            if(listOfFiles[i].getName().endsWith(".xml"))
             dlm.addElement(listOfFiles[i].getName());
         }
         savedSetList.setModel(dlm);

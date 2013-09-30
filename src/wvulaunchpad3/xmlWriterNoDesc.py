@@ -3,16 +3,15 @@
 import sys
 import os
 
-description = sys.argv[1]
-beginning = sys.argv[2]
-middle = sys.argv[3]
-end = sys.argv[4]
-new = sys.argv[5]
 
-if (os.path.isfile(new)):
-    new.remove()
+beginning = sys.argv[1]
+middle = sys.argv[2]
+end = sys.argv[3]
+new = sys.argv[4]
 
-description = open(description, 'r')
+
+
+
 beginningFile = open(beginning,'r')
 middle = open(middle,'r')
 end = open(end,'r')
