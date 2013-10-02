@@ -16,10 +16,13 @@ public class Set {
     private ArrayList<Cell> cells;
     private String description;
     
-    public Set(File[] cellDirectories) throws IOException{
+    public Set(File[] cellDirectories) throws GeneralException {
         cells = new ArrayList<Cell>();
         for (File cellDirectory : cellDirectories){
-            cells.add(new Cell(cellDirectory));
+            
+                cells.add(new Cell(cellDirectory));
+    
+            
         }
     }
     

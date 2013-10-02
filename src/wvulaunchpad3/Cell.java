@@ -5,7 +5,6 @@
 package wvulaunchpad3;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -17,7 +16,7 @@ public class Cell {
     private String name;
     
     
-    public Cell(File cellDirectory) throws IOException{
+    public Cell(File cellDirectory){
         name = cellDirectory.toString();
         String dendriteRegex = "dendrite1.obj";
         String inputRegex = "input[0-9]+.obj";
