@@ -5,13 +5,12 @@
 package wvulaunchpad3;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Properties;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -27,15 +26,21 @@ import javax.swing.tree.TreeSelectionModel;
  * @author callie
  */
 public class main extends javax.swing.JFrame {
+
     String dataPath;
     String savedSetDirectory;
+
     /**
      * Creates new form main
      */
     public main() {
-        this.setTitle("WVU LaunchPad");
+        this.setTitle("WVU Mission Control");
         initComponents();
-        loadProperties();
+        try {
+            loadProperties();
+        } catch (GeneralException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
         getAndSetTree();
         refreshSavedSetList();
     }
@@ -100,7 +105,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
-        launchButton.setText("Launch");
+        launchButton.setText("Initialize CalVR with Selection");
         launchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 launchButtonActionPerformed(evt);
@@ -111,7 +116,7 @@ public class main extends javax.swing.JFrame {
 
         jLabel2.setText("Saved Sets");
 
-        loadButton.setText("Load");
+        loadButton.setText("Initialize Saved Set");
         loadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadButtonActionPerformed(evt);
@@ -122,7 +127,8 @@ public class main extends javax.swing.JFrame {
         savedSetDescription.setRows(5);
         jScrollPane3.setViewportView(savedSetDescription);
 
-        jLabel3.setText("Saved Set Info");
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Saved Set Information");
 
         FileMenu.setText("File");
 
@@ -165,30 +171,29 @@ public class main extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(loadButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(loadButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(saveButton)
                     .addComponent(removeButton)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -210,71 +215,90 @@ public class main extends javax.swing.JFrame {
      * Creates a Set of cells based on the currently selected tree nodes.
      */
     private void launchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_launchButtonActionPerformed
-        Set set = createSetFromSelection(volumeTree.getSelectionPaths());
+        Set set = null;
+        try {
+            set = createSetFromSelection(volumeTree.getSelectionPaths());
+        } catch (GeneralException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
         try {
             new XMLWriter(set).write();
         } catch (IOException ex) {
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, "Error writing xml file.");
         }
     }//GEN-LAST:event_launchButtonActionPerformed
-/*
- * Creates and saves a .xml config file based on the currently selected tree nodes.
- * The .xml file is saved to the specified save file directory.
- */
+    /*
+     * Creates and saves a .xml config file based on the currently selected tree nodes.
+     * The .xml file is saved to the specified save file directory.
+     */
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         String saveName = JOptionPane.showInputDialog("Name Your Set");
         String description = JOptionPane.showInputDialog("Describe your set");
         String xmlFile = savedSetDirectory + saveName + ".xml";
-        Set set = createSetFromSelection(volumeTree.getSelectionPaths());
+        Set set = null;
+        try {
+            set = createSetFromSelection(volumeTree.getSelectionPaths());
+        } catch (GeneralException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
         set.setDescription(description);
         try {
             new XMLWriter(set).write(xmlFile);
         } catch (IOException ex) {
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, "Error writing xml file.");
         }
         DefaultListModel dlm = (DefaultListModel) savedSetList.getModel();
         dlm.addElement(saveName + ".xml");
     }//GEN-LAST:event_saveButtonActionPerformed
-/*
- * Copies the saved .xml file into the default runtime config file.
- */
+    /*
+     * Copies the saved .xml file into the default runtime config file.
+     */
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
-        String setPath = savedSetDirectory + savedSetList.getSelectedValue();       
+        String setPath = savedSetDirectory + savedSetList.getSelectedValue();
         try {
             new XMLWriter().copyOver(setPath);
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, "File not found error.");
         } catch (IOException ex) {
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, "Error writing xml file.");
         }
     }//GEN-LAST:event_loadButtonActionPerformed
-/*
- * Removes a saved set from the list and deletes its .xml file from the system.
- */
+    /*
+     * Removes a saved set from the list and deletes its .xml file from the system.
+     */
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
-       String selectedSet = (String) savedSetList.getSelectedValue(); 
-       new File(savedSetDirectory + selectedSet).delete();
-       savedSetList.removeAll();
-       refreshSavedSetList();
+        String selectedSet = (String) savedSetList.getSelectedValue();
+        new File(savedSetDirectory + selectedSet).delete();
+        savedSetList.removeAll();
+        refreshSavedSetList();
     }//GEN-LAST:event_removeButtonActionPerformed
-/*
- * Displays the current data path and allows it to be changed.
- */
+    /*
+     * Displays the current data path and allows it to be changed.
+     */
     private void DataPathMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataPathMenuActionPerformed
         dataPath = JOptionPane.showInputDialog("Edit Data Path", dataPath);
-        editProperties("dataPath", dataPath);
+        if (!dataPath.endsWith("/")) dataPath += "/";
+        try {
+            editProperties("dataPath", dataPath);
+        } catch (GeneralException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
         getAndSetTree();
     }//GEN-LAST:event_DataPathMenuActionPerformed
 
     private void SavedSetPathMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SavedSetPathMenuActionPerformed
-       
         savedSetDirectory = JOptionPane.showInputDialog("Edit Saved Set Path", savedSetDirectory);
-        editProperties("savedSetDirectory", savedSetDirectory);
+        if (!savedSetDirectory.endsWith("/")) savedSetDirectory += "/";
+        try {
+            editProperties("savedSetDirectory", savedSetDirectory);
+        } catch (GeneralException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
         refreshSavedSetList();
-        
+
     }//GEN-LAST:event_SavedSetPathMenuActionPerformed
 
-    private void editProperties(String key, String value){
+    private void editProperties(String key, String value) throws GeneralException{
         Properties config = new Properties();
         try {
             InputStream in;
@@ -285,20 +309,26 @@ public class main extends javax.swing.JFrame {
             config.setProperty(key, value);
             config.store(out, null);
             out.close();
-            
+
+        } catch (FileNotFoundException ex) {
+            throw new GeneralException("Error locating properties file.");
+        } catch (IOException ex) {
+            throw new GeneralException("Error accessing properties file.");
+        }
+
+    }
+
+    private void savedSetListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_savedSetListValueChanged
+        File xml = new File(savedSetDirectory + savedSetList.getSelectedValue());
+        try {
+            String fileText = new Scanner(xml).useDelimiter("\\A").next();
+            if (fileText.contains("<desc>") && fileText.contains("</desc>")) {
+                String description = fileText.substring(fileText.indexOf("<desc>") + 6, fileText.indexOf("</desc>"));
+                savedSetDescription.setText(description);
+            }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    }
-    
-    private void savedSetListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_savedSetListValueChanged
-        String description;
-        File xml = new File(savedSetDirectory + savedSetList.getSelectedValue());
-        description = new SaxParser(xml).parseDocument();
-        savedSetDescription.setText(description);
     }//GEN-LAST:event_savedSetListValueChanged
 
     /**
@@ -327,7 +357,7 @@ public class main extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -360,50 +390,50 @@ public class main extends javax.swing.JFrame {
     /*
      * Initializes global property variables based on the properties file.
      */
-    private void loadProperties(){
+    private void loadProperties() throws GeneralException {
         Properties config = new Properties();
-        
+
         try {
             InputStream in;
             in = main.class.getClassLoader().getResourceAsStream("wvulaunchpad3/configuration.properties");
             config.load(in);
         } catch (IOException ex) {
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+            throw new GeneralException("Configuration file not found.");
+        } catch(NullPointerException ex) {
+            throw new GeneralException("Configuration file not found.");
         }
+        
         dataPath = config.getProperty("dataPath");
         savedSetDirectory = config.getProperty("savedSetDirectory");
     }
-    
+
     /*
      * Creates a tree and populates it with the
      * file structure of the specified data path.
      */
     private void getAndSetTree() {
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode(new File(dataPath));
-        recursivePopulate(root, new CellDirectory(dataPath));
+        File dataDirectory = new File(dataPath);
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode(dataDirectory);
+        for (File file : dataDirectory.listFiles()) {
+            recursivePopulate(root, new CellDirectory(file));
+        }
         DefaultTreeModel model = new DefaultTreeModel(root);
         volumeTree.setModel(model);
         volumeTree.setSelectionModel(new DefaultTreeSelectionModel());
         volumeTree.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
     }
-    /*
-    * Recursively crawls through a directory and adds each file and folder as a
-    * node in the tree.
-    */
-    private void recursivePopulate(DefaultMutableTreeNode parent, CellDirectory f) {
-        DefaultMutableTreeNode cell;
-        if ((f.getPath().equals(dataPath) ) || (f.getPath().equals(dataPath.substring(0,dataPath.length()-1)))){
-           
-           cell = parent;
-        }
-        else {
-           cell = new DefaultMutableTreeNode(f); 
-           parent.add(cell);
-        }
-         //If we only want directories, put this line inside subsequent if statement
 
+    /*
+     * Recursively crawls through a directory and adds each file and folder as a
+     * node in the tree.
+     */
+    private void recursivePopulate(DefaultMutableTreeNode parent, CellDirectory f) {
+
+        DefaultMutableTreeNode cell = new DefaultMutableTreeNode(f);
+
+        parent.add(cell); //If we only want directories, put this line inside subsequent if statement
         if (f.isDirectory()) {
-          
+
             File[] subFiles = f.listFiles();
 
             //---Recurse through all sub directories/files
@@ -415,36 +445,30 @@ public class main extends javax.swing.JFrame {
     /*
      * Creates a Set of cells based on the selected nodes.
      */
-    private Set createSetFromSelection(TreePath[] selectionPaths) {
+    private Set createSetFromSelection(TreePath[] selectionPaths) throws GeneralException {
         File[] cellDirectories = new File[selectionPaths.length];
         for (int i = 0; i < cellDirectories.length; i++) {
-            DefaultMutableTreeNode selectedNode = new DefaultMutableTreeNode(selectionPaths[i].getLastPathComponent());
-            String parentPath = "";
+            String directoryPath = "";
             for (int j = 0; j < selectionPaths[i].getPathCount(); j++) {
-                parentPath = parentPath + "/" + selectionPaths[i].getPathComponent(j);
+                directoryPath += selectionPaths[i].getPathComponent(j) + "/";
             }
-            String directoryPath = parentPath + "/";
             cellDirectories[i] = new File(directoryPath);
         }
-        Set set = null;
-        try {
-            System.out.println(cellDirectories);
-            set = new Set(cellDirectories);
-        } catch (IOException ex) {
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Set set = new Set(cellDirectories);
         return set;
     }
     /*
      * Refreshes the list of saved sets in order to display recent changes.
      */
+
     private void refreshSavedSetList() {
         File folder = new File(savedSetDirectory);
         File[] listOfFiles = folder.listFiles();
         DefaultListModel dlm = new DefaultListModel();
         for (int i = 0; i < listOfFiles.length; i++) {
-            if(listOfFiles[i].getName().endsWith(".xml"))
-            dlm.addElement(listOfFiles[i].getName());
+            if (listOfFiles[i].getName().endsWith(".xml")) {
+                dlm.addElement(listOfFiles[i].getName());
+            }
         }
         savedSetList.setModel(dlm);
         savedSetList.validate();

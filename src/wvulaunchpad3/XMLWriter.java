@@ -41,15 +41,15 @@ public class XMLWriter {
     }
 
     public void write(String specifiedFilePath) throws FileNotFoundException, IOException {
-        String description = set.getDescription() + "\n";
+        String description = set.getDescription() + "\n" + "\n";
         description += "Cells:\n";
         ArrayList<Cell> cells = set.getCells();
         for (Cell cell : cells){
             description += cell.getName() + "\n";
         }
-        System.out.println(description);
         FileWriter fw = new FileWriter("/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/description.xml");
-        fw.write("<desc>\n");
+        fw.write("<?xml version=\"1.0\"?>");
+        fw.write("<desc>");
         fw.write(description);
         fw.write("</desc>");
         fw.close();
@@ -71,7 +71,7 @@ public class XMLWriter {
       
         String[] params = new String[6];
         params[0] = "python";
-        params[1] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/xmlWriter.py";
+        params[1] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/xmlWriterNoDesc.py";
         params[2] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/empty.xml";
         params[3] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/empty.xml";
         params[4] = specifiedFilePath;
