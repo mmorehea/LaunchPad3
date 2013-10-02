@@ -19,11 +19,10 @@ public class Set {
     public Set(File[] cellDirectories) throws GeneralException {
         cells = new ArrayList<Cell>();
         for (File cellDirectory : cellDirectories){
-            try {
+            
                 cells.add(new Cell(cellDirectory));
-            } catch (IOException ex) {
-                throw new GeneralException("Error creating cell from: " + cellDirectory.getName());
-            }
+    
+            
         }
     }
     

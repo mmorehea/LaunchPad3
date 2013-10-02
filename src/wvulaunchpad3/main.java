@@ -9,7 +9,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.Charset;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -21,7 +20,6 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultTreeSelectionModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
-import sun.nio.cs.StandardCharsets;
 
 /**
  *
@@ -38,7 +36,11 @@ public class main extends javax.swing.JFrame {
     public main() {
         this.setTitle("WVU LaunchPad");
         initComponents();
-        loadProperties();
+        try {
+            loadProperties();
+        } catch (GeneralException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
         getAndSetTree();
         refreshSavedSetList();
     }
@@ -103,7 +105,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
-        launchButton.setText("Launch");
+        launchButton.setText("Initialize CalVR with Selection");
         launchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 launchButtonActionPerformed(evt);
@@ -114,7 +116,7 @@ public class main extends javax.swing.JFrame {
 
         jLabel2.setText("Saved Sets");
 
-        loadButton.setText("Load");
+        loadButton.setText("Initialize Saved Set");
         loadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadButtonActionPerformed(evt);
@@ -125,7 +127,8 @@ public class main extends javax.swing.JFrame {
         savedSetDescription.setRows(5);
         jScrollPane3.setViewportView(savedSetDescription);
 
-        jLabel3.setText("Saved Set Info");
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Saved Set Information");
 
         FileMenu.setText("File");
 
@@ -168,30 +171,29 @@ public class main extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(loadButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(loadButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(saveButton)
                     .addComponent(removeButton)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -389,7 +391,7 @@ public class main extends javax.swing.JFrame {
     /*
      * Initializes global property variables based on the properties file.
      */
-    private void loadProperties() {
+    private void loadProperties() throws GeneralException {
         Properties config = new Properties();
 
         try {
@@ -397,8 +399,11 @@ public class main extends javax.swing.JFrame {
             in = main.class.getClassLoader().getResourceAsStream("wvulaunchpad3/configuration.properties");
             config.load(in);
         } catch (IOException ex) {
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+            throw new GeneralException("Configuration file not found.");
+        } catch(NullPointerException ex) {
+            throw new GeneralException("Configuration file not found.");
         }
+        
         dataPath = config.getProperty("dataPath");
         savedSetDirectory = config.getProperty("savedSetDirectory");
     }

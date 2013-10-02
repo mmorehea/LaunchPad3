@@ -23,10 +23,13 @@ public class SaxParser extends DefaultHandler{
 
     private String description;
     private File savedSet;
-    private StringBuffer descBuffer;
+    private String descBuffer = "";
+    private boolean bDesc = false;
+    private boolean bPath = false;
 
     public SaxParser(File savedSet) {
         this.savedSet = savedSet;
+        System.out.println("Document parsed");
         parseDocument();
     }
     
@@ -49,17 +52,30 @@ public class SaxParser extends DefaultHandler{
     
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException{
         if (qName.equalsIgnoreCase("desc")){
-            descBuffer = new StringBuffer(2000);
+            bDesc = true;
+        }
+        else if (qName.equalsIgnoreCase("cellpaths")){
+            bPath = true;
         }
     }
     
     public void characters(char ch[], int start, int length) throws SAXException {
-        descBuffer.append(ch, start, length);
+        //descBuffer += new String(ch, start, length);
+        if(bDesc) {
+            System.out.println(new String(ch,start,length));
+           // descBuffer = new String(ch, start, length) + "\n";
+           bDesc = false;
+        }
+        else if(bPath){
+            System.out.println("Path is" + new String(ch,start,length));
+            bPath = false;
+        }
     }
 
     public void endElement(String uri, String localName, String qName) throws SAXException {
-        if (qName.equals("desc")) {
-            description = descBuffer.toString();
+        if (bDesc) {
+          //  description = descBuffer;
+            
         }
     }
 }

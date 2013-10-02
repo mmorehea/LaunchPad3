@@ -17,9 +17,6 @@ middle = open(middle,'r')
 end = open(end,'r')
 new = open(new,'w')
 
-for line1 in description:
-    new.write(line1)
-
 for line2 in beginningFile:
     new.write(line2)
 
