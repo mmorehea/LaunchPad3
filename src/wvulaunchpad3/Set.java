@@ -37,7 +37,7 @@ public class Set {
         return cells;
     }
     
-    public String toXML(){
+    public String toXML() throws GeneralException{
         String xml = "<SetView value=\"on\">\n";
         xml += "<Structure>\n";
         xml += "<NumCells value=\""+cells.size()+"\"/>\n";

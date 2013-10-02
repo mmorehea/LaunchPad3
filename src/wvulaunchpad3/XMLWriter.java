@@ -17,7 +17,7 @@ public class XMLWriter {
     private Set set;
     private String setViewXML;
 
-    public XMLWriter(Set set) {
+    public XMLWriter(Set set) throws GeneralException {
         setViewXML = set.toXML();
         this.set = set;
     }

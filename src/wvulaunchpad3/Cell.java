@@ -24,26 +24,7 @@ public class Cell {
         File[] partFiles = cellDirectory.listFiles();
         
         for (File partFile : partFiles){
-            String[] strippedFileList;
-            String regex = "_";
-            strippedFileList = partFile.toString().split(regex);
-            String justFileEnd = strippedFileList[strippedFileList.length-1];
-            if (justFileEnd.equals("nucleus.obj")) {
-                parts.add(new Part(partFile));
-            }
-            else if (justFileEnd.equals("axon.obj")) {
-                parts.add(new Part(partFile));
-            }
-            else if (justFileEnd.equals("cellbody.obj")) {
-                parts.add(new Part(partFile));
-            }
-            else if (justFileEnd.matches(dendriteRegex)){
-                parts.add(new Part(partFile));
-            }
-            else if (justFileEnd.matches(inputRegex)){
-                parts.add(new Part(partFile));
-            }
-            
+            parts.add(new Part(partFile));
         }
         
     }
@@ -52,7 +33,7 @@ public class Cell {
         return name;
     }
     
-    public String toXML(){
+    public String toXML() throws GeneralException{
         String xml = "<NumLayers value=\""+parts.size()+"\"/>\n";
         for (int i = 0; i < parts.size(); i++){
             xml += "<Layer"+i+">\n";

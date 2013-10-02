@@ -13,6 +13,11 @@ import java.io.File;
 public class Part {
     private String type;
     private String filePath;
+    private String inputRegex = "input([0-9]+)";
+    private String dendriteRegex = "dendrite[0-9]+";
+    private String axonRegex = "axon";
+    private String cellBodyRegex = "cellbody";
+    private String nucleusRegex = "nucleus";
     
     public Part(File partFile){
         filePath = partFile.getAbsolutePath();
@@ -23,13 +28,12 @@ public class Part {
     public String getType(){
         return type;
     }
-    public String toXML(){
-        String inputRegex = "input([0-9]+)";
-        String dendriteRegex = "dendrite[0-9]+";
-        String IN = "in$1";
+    public String toXML() throws GeneralException{
+
+        String in = "in$1";
         String dend = "dendrite";
         if (type.matches(inputRegex)){
-            String t = type.replaceAll(inputRegex, IN);
+            String t = type.replaceAll(inputRegex, in);
             String xml = "<name value=\""+t+"\"/>\n";
             xml += "<file value=\""+filePath+"\"/>\n";
             return xml;
@@ -41,10 +45,11 @@ public class Part {
             xml += "<file value=\""+filePath+"\"/>\n";
             return xml;
         }
-        else {
-        String xml = "<name value=\""+type+"\"/>\n";
-        xml += "<file value=\""+filePath+"\"/>\n";
-        return xml;
+        else if (type.matches(axonRegex) || type.matches(cellBodyRegex) || type.matches(nucleusRegex)){
+            String xml = "<name value=\""+type+"\"/>\n";
+            xml += "<file value=\""+filePath+"\"/>\n";
+            return xml;
         }
+        else throw new GeneralException("Unhandled cell type detected.");
     }
 }

@@ -225,6 +225,8 @@ public class main extends javax.swing.JFrame {
             new XMLWriter(set).write();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(rootPane, "Error writing xml file.");
+        } catch (GeneralException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         }
     }//GEN-LAST:event_launchButtonActionPerformed
     /*
@@ -246,6 +248,8 @@ public class main extends javax.swing.JFrame {
             new XMLWriter(set).write(xmlFile);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(rootPane, "Error writing xml file.");
+        } catch (GeneralException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         }
         DefaultListModel dlm = (DefaultListModel) savedSetList.getModel();
         dlm.addElement(saveName + ".xml");
