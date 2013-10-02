@@ -14,31 +14,40 @@ import java.util.ArrayList;
 public class Cell {
     private ArrayList<Part> parts;
     private String name;
+    private Part fullModel = null;
+    
     
     
     public Cell(File cellDirectory){
         name = cellDirectory.toString();
-        String dendriteRegex = "dendrite1.obj";
-        String inputRegex = "input[0-9]+.obj";
         parts = new ArrayList<Part>();
         File[] partFiles = cellDirectory.listFiles();
-        
+
         for (File partFile : partFiles){
-            parts.add(new Part(partFile));
+            String filePath = partFile.getPath();
+            if (filePath.substring(filePath.lastIndexOf("_") + 1, filePath.lastIndexOf(".")).equalsIgnoreCase("FULL")){
+                fullModel = new Part(partFile);
+            } else parts.add(new Part(partFile));
         }
-        
     }
     
     public String getName(){
         return name;
     }
     
-    public String toXML() throws GeneralException{
+    public String toSetViewXML() throws GeneralException{
         String xml = "<NumLayers value=\""+parts.size()+"\"/>\n";
         for (int i = 0; i < parts.size(); i++){
             xml += "<Layer"+i+">\n";
-            xml += parts.get(i).toXML();
+            xml += parts.get(i).toSetViewXML();
             xml += "</Layer"+i+">\n";
+        }
+        return xml;
+    }
+    public String toModelLoaderXML(){
+        String xml = "";
+        if (fullModel!=null){
+            xml = fullModel.toModelLoaderXML();
         }
         return xml;
     }

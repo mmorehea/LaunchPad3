@@ -105,7 +105,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
-        launchButton.setText("Initialize CalVR with Selection");
+        launchButton.setText("Initialize CalVR");
         launchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 launchButtonActionPerformed(evt);
@@ -116,7 +116,7 @@ public class main extends javax.swing.JFrame {
 
         jLabel2.setText("Saved Sets");
 
-        loadButton.setText("Initialize Saved Set");
+        loadButton.setText("Initialize CalVR");
         loadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadButtonActionPerformed(evt);

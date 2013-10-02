@@ -184,7 +184,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="launchButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Initialize CalVR with Selection"/>
+        <Property name="text" type="java.lang.String" value="Initialize CalVR"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="launchButtonActionPerformed"/>
@@ -202,7 +202,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="loadButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Initialize Saved Set"/>
+        <Property name="text" type="java.lang.String" value="Initialize CalVR"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loadButtonActionPerformed"/>

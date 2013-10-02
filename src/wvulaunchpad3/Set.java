@@ -19,10 +19,7 @@ public class Set {
     public Set(File[] cellDirectories) throws GeneralException {
         cells = new ArrayList<Cell>();
         for (File cellDirectory : cellDirectories){
-            
-                cells.add(new Cell(cellDirectory));
-    
-            
+                cells.add(new Cell(cellDirectory));            
         }
     }
     
@@ -37,19 +34,30 @@ public class Set {
         return cells;
     }
     
-    public String toXML() throws GeneralException{
+    public String toSetViewXML() throws GeneralException{
         String xml = "<SetView value=\"on\">\n";
         xml += "<Structure>\n";
         xml += "<NumCells value=\""+cells.size()+"\"/>\n";
         
         for (int i = 0; i < cells.size(); i++){
             xml += "<Cell"+i+">\n";
-            xml += cells.get(i).toXML();
+            xml += cells.get(i).toSetViewXML();
             xml += "</Cell"+i+">\n";
         }
         
         xml += "</Structure>\n";
         xml += "</SetView>\n";
+        return xml;
+    }
+    public String toModelLoaderXML(){
+        String xml = "<ModelLoader value =\"on\">\n";
+        xml += "<ConfigDir value=\"/data/ModelLoader/\" />\n";
+        xml += "<Files>\n";
+        for (Cell cell : cells){
+            xml += cell.toModelLoaderXML();
+        }
+        xml += "</Files>\n";
+        xml += "</ModelLoader>\n";
         return xml;
     }
 }

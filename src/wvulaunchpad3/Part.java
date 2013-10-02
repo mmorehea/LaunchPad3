@@ -28,8 +28,7 @@ public class Part {
     public String getType(){
         return type;
     }
-    public String toXML() throws GeneralException{
-
+    public String toSetViewXML() throws GeneralException{
         String in = "in$1";
         String dend = "dendrite";
         if (type.matches(inputRegex)){
@@ -51,5 +50,10 @@ public class Part {
             return xml;
         }
         else throw new GeneralException("Unhandled cell type detected.");
+    }
+    public String toModelLoaderXML(){
+        String name = filePath.substring(filePath.lastIndexOf("/") + 1, filePath.lastIndexOf("."));
+        String xml = "<" + name + " path=\"" + filePath + "\" mask=\"0\" />\n";
+        return xml;
     }
 }
