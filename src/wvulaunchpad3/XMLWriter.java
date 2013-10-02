@@ -48,6 +48,7 @@ public class XMLWriter {
             description += cell.getName() + "\n";
         }
         FileWriter fw = new FileWriter("/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/description.xml");
+        fw.write("<?xml version=\"1.0\"?>");
         fw.write("<desc>");
         fw.write(description);
         fw.write("</desc>");

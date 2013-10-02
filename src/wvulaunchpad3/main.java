@@ -34,7 +34,7 @@ public class main extends javax.swing.JFrame {
      * Creates new form main
      */
     public main() {
-        this.setTitle("WVU LaunchPad");
+        this.setTitle("WVU Mission Control");
         initComponents();
         try {
             loadProperties();
@@ -329,7 +329,6 @@ public class main extends javax.swing.JFrame {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_savedSetListValueChanged
 
     /**
