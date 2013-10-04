@@ -16,9 +16,11 @@ import java.util.ArrayList;
 public class XMLWriter {
     private Set set;
     private String setViewXML;
+    private String modelLoaderXML;
 
     public XMLWriter(Set set) throws GeneralException {
         setViewXML = set.toSetViewXML();
+        modelLoaderXML += set.toModelLoaderXML();
         this.set = set;
     }
 
@@ -27,16 +29,21 @@ public class XMLWriter {
     }
 
     public void write() throws FileNotFoundException, IOException {
-        FileWriter fw = new FileWriter("/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/middle.xml");
+        FileWriter fw = new FileWriter("/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/setView.xml");
         fw.write(this.setViewXML);
         fw.close();
-        String[] params = new String[6];
+        fw =  new FileWriter("/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/modelLoader.xml");
+        fw.write(this.modelLoaderXML);
+        fw.close();
+        String[] params = new String[8];
         params[0] = "python";
         params[1] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/xmlWriterNoDesc.py";
         params[2] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/beginning.xml";
-        params[3] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/middle.xml";
-        params[4] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/end.xml";
-        params[5] = "/home/calvr/setconfig/runtimeConfig.xml";
+        params[3] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/setView.xml";
+        params[4] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/middle.xml";
+        params[5] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/modelLoader.xml";
+        params[6] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/end.xml";
+        params[7] = "/home/calvr/setconfig/runtimeConfig.xml";
         Runtime.getRuntime().exec(params);
     }
 
@@ -53,17 +60,22 @@ public class XMLWriter {
         fw.write(description);
         fw.write("</desc>");
         fw.close();
-        fw = new FileWriter("/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/middle.xml");
+        fw = new FileWriter("/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/setView.xml");
         fw.write(this.setViewXML);
         fw.close();
-        String[] params = new String[7];
+        fw = new FileWriter("/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/modelLoader.xml");
+        fw.write(this.modelLoaderXML);
+        fw.close();
+        String[] params = new String[9];
         params[0] = "python";
         params[1] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/xmlWriter.py";
         params[2] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/description.xml";
         params[3] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/beginning.xml";
-        params[4] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/middle.xml";
-        params[5] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/end.xml";
-        params[6] = specifiedFilePath;
+        params[4] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/setView.xml";
+        params[5] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/middle.xml";
+        params[6] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/modelLoader.xml";
+        params[7] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/end.xml";
+        params[8] = specifiedFilePath;
         Runtime.getRuntime().exec(params);
     }
     
@@ -74,8 +86,10 @@ public class XMLWriter {
         params[1] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/xmlWriterNoDesc.py";
         params[2] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/empty.xml";
         params[3] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/empty.xml";
-        params[4] = specifiedFilePath;
-        params[5] = "/home/calvr/setconfig/runtimeConfig.xml";
+        params[4] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/empty.xml";
+        params[5] = "/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/empty.xml";
+        params[6] = specifiedFilePath;
+        params[7] = "/home/calvr/setconfig/runtimeConfig.xml";
         Runtime.getRuntime().exec(params);
     }
 }

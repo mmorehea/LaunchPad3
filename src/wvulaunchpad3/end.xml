@@ -1,37 +1,3 @@
-        <ArtifactVis>
-          <Database value="/home/aprudhom/data/ArtifactVis/artifactslist.txt" />
-	  <TopoFile value="/home/aprudhom/data/kyle/3d-model/Ken3dv3.wrl" />
-	  <PicFolder value="/home/covise/data/kyle/pictures/AllPics/" />
-	  <DCInfoFile value="/home/aprudhom/CVRPlugins/calit2/ArtifactVis/DCCategories.txt" />
-	  <LociFile value="/home/aprudhom/CVRPlugins/calit2/ArtifactVis/AreaMLociDepth.kml" />
-	  <ArtifactFileList value="/home/covise/data/3DArtifacts.txt" />
-	  <ArchInterfaceFolder value="/home/aprudhom/data/ArchInterface/" />
-          <MaxVisibleRange value="1000000000.0" />
-          <Offset>
-            <X value="-3396591.682" />
-            <Y value="-733458.55" />
-            <Z value="-49.44" />
-          </Offset>
-          <Site>
-            <Longitude value="35.491239" />
-            <Latitude value="30.628039" />
-            <!--Height value="0" /-->
-            <!--Scale value="1" /-->
-          </Site>
-          <Tessellation value=".2" />
-	  <ArtifactPanel x="-200" y="25" z="100" scale="1.0" />
-        </ArtifactVis>
-
-    <ModelLoader value="on" >
-      <ConfigDir value="/data/ModelLoader/" />
-      <Files>
-        <p4_c41 path="/home/data/p4_c41.wrl" mask="0" />
-        <R10 path="/home/calvr/fromCallie/p4_c41_R10.obj" mask="0" />
-	<R20 path="/home/calvr/fromCallie/p4_c41_R20.obj" mask="0" />
-        <R50 path="/home/calvr/fromCallie/p4_c41_R50.obj" mask="0" />      
-	</Files>                          
-    </ModelLoader>
-
     <ImageViewer value="on" >
       <DefaultPaths value="/home/calvr/Downloads/" />
       <Files>

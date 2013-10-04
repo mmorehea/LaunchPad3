@@ -1,75 +1,23 @@
-<SetView value="on">
-<Structure>
-<NumCells value="2"/>
-<Cell0>
-<NumLayers value="7"/>
-<Layer0>
-<name value="nucleus"/>
-<file value="/home/data/Volumes/Standard/p3_c7/p3_c7_nucleus.obj"/>
-</Layer0>
-<Layer1>
-<name value="in3"/>
-<file value="/home/data/Volumes/Standard/p3_c7/p3_c7_input3.obj"/>
-</Layer1>
-<Layer2>
-<name value="cellbody"/>
-<file value="/home/data/Volumes/Standard/p3_c7/p3_c7_cellbody.obj"/>
-</Layer2>
-<Layer3>
-<name value="dendrite"/>
-<file value="/home/data/Volumes/Standard/p3_c7/p3_c7_dendrite1.obj"/>
-</Layer3>
-<Layer4>
-<name value="in1"/>
-<file value="/home/data/Volumes/Standard/p3_c7/p3_c7_input1.obj"/>
-</Layer4>
-<Layer5>
-<name value="axon"/>
-<file value="/home/data/Volumes/Standard/p3_c7/p3_c7_axon.obj"/>
-</Layer5>
-<Layer6>
-<name value="in2"/>
-<file value="/home/data/Volumes/Standard/p3_c7/p3_c7_input2.obj"/>
-</Layer6>
-</Cell0>
-<Cell1>
-<NumLayers value="9"/>
-<Layer0>
-<name value="in3"/>
-<file value="/home/data/Volumes/Standard/p3_c9/p3_c9_input3.obj"/>
-</Layer0>
-<Layer1>
-<name value="in1"/>
-<file value="/home/data/Volumes/Standard/p3_c9/p3_c9_input1.obj"/>
-</Layer1>
-<Layer2>
-<name value="nucleus"/>
-<file value="/home/data/Volumes/Standard/p3_c9/p3_c9_nucleus.obj"/>
-</Layer2>
-<Layer3>
-<name value="in4"/>
-<file value="/home/data/Volumes/Standard/p3_c9/p3_c9_input4.obj"/>
-</Layer3>
-<Layer4>
-<name value="dendrite"/>
-<file value="/home/data/Volumes/Standard/p3_c9/p3_c9_dendrite1.obj"/>
-</Layer4>
-<Layer5>
-<name value="in5"/>
-<file value="/home/data/Volumes/Standard/p3_c9/p3_c9_input5.obj"/>
-</Layer5>
-<Layer6>
-<name value="axon"/>
-<file value="/home/data/Volumes/Standard/p3_c9/p3_c9_axon.obj"/>
-</Layer6>
-<Layer7>
-<name value="in2"/>
-<file value="/home/data/Volumes/Standard/p3_c9/p3_c9_input2.obj"/>
-</Layer7>
-<Layer8>
-<name value="cellbody"/>
-<file value="/home/data/Volumes/Standard/p3_c9/p3_c9_cellbody.obj"/>
-</Layer8>
-</Cell1>
-</Structure>
-</SetView>
+        <ArtifactVis>
+          <Database value="/home/aprudhom/data/ArtifactVis/artifactslist.txt" />
+	  <TopoFile value="/home/aprudhom/data/kyle/3d-model/Ken3dv3.wrl" />
+	  <PicFolder value="/home/covise/data/kyle/pictures/AllPics/" />
+	  <DCInfoFile value="/home/aprudhom/CVRPlugins/calit2/ArtifactVis/DCCategories.txt" />
+	  <LociFile value="/home/aprudhom/CVRPlugins/calit2/ArtifactVis/AreaMLociDepth.kml" />
+	  <ArtifactFileList value="/home/covise/data/3DArtifacts.txt" />
+	  <ArchInterfaceFolder value="/home/aprudhom/data/ArchInterface/" />
+          <MaxVisibleRange value="1000000000.0" />
+          <Offset>
+            <X value="-3396591.682" />
+            <Y value="-733458.55" />
+            <Z value="-49.44" />
+          </Offset>
+          <Site>
+            <Longitude value="35.491239" />
+            <Latitude value="30.628039" />
+            <!--Height value="0" /-->
+            <!--Scale value="1" /-->
+          </Site>
+          <Tessellation value=".2" />
+	  <ArtifactPanel x="-200" y="25" z="100" scale="1.0" />
+        </ArtifactVis>
