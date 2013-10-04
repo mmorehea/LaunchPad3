@@ -20,7 +20,7 @@ public class XMLWriter {
 
     public XMLWriter(Set set) throws GeneralException {
         setViewXML = set.toSetViewXML();
-        modelLoaderXML += set.toModelLoaderXML();
+        modelLoaderXML = set.toModelLoaderXML();
         this.set = set;
     }
 
@@ -55,7 +55,7 @@ public class XMLWriter {
             description += cell.getName() + "\n";
         }
         FileWriter fw = new FileWriter("/home/calvr/NetBeansProjects/WVULaunchPad3/src/wvulaunchpad3/description.xml");
-        fw.write("<?xml version=\"1.0\"?>");
+        fw.write("<?xml version=\"1.0\"?>\n");
         fw.write("<desc>");
         fw.write(description);
         fw.write("</desc>");

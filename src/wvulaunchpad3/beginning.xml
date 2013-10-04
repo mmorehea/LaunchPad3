@@ -1,4 +1,5 @@
- <GLOBAL>
+<?xml version="1.0"?>
+<GLOBAL>
 
    <!--Background g="0.6" a=".5" r=".6" b=".6"/-->
    <Background g="0.239215686" a="0.5" r="0.509803922" b="0.17647"/>
