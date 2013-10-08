@@ -38,19 +38,19 @@ public class Part {
             return xml;
             
         }
-        else if (type.matches(dendriteRegex)){
-            String t = type.replaceAll(dendriteRegex, dend);
-            String xml = "<name value=\""+t+"\"/>\n";
-            xml += "<file value=\""+filePath+"\"/>\n";
-            return xml;
-        }
-        else if (type.matches(axonRegex) || type.matches(cellBodyRegex) || type.matches(nucleusRegex)){
+        //else if (type.matches(dendriteRegex)){
+            //String t = type.replaceAll(dendriteRegex, dend);
+          //  String xml = "<name value=\""+type+"\"/>\n";
+            //xml += "<file value=\""+filePath+"\"/>\n";
+            //return xml;
+        //}
+        else if (type.matches(axonRegex) || type.matches(cellBodyRegex) || type.matches(nucleusRegex) || type.matches(dendriteRegex)){
             String xml = "<name value=\""+type+"\"/>\n";
             xml += "<file value=\""+filePath+"\"/>\n";
             return xml;
         }
         else return "";
-        //else throw new GeneralException("Unhandled cell type detected.");
+        
     }
     public String toModelLoaderXML(){
         String name = filePath.substring(filePath.lastIndexOf("/") + 1, filePath.lastIndexOf("."));

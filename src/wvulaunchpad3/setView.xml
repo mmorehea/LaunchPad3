@@ -1,44 +1,36 @@
 <SetView value="on">
 <Structure>
-<NumCells value="2"/>
+<NumCells value="3"/>
 <Cell0>
-<NumLayers value="9"/>
+<NumLayers value="7"/>
 <Layer0>
-<name value="in5"/>
-<file value="/home/data/Volumes/Standard/p3_c6/p3_c6_input5.obj"/>
+<name value="nucleus"/>
+<file value="/home/data/Volumes/Standard/p3_c7/p3_c7_nucleus.obj"/>
 </Layer0>
 <Layer1>
-<name value="axon"/>
-<file value="/home/data/Volumes/Standard/p3_c6/p3_c6_axon.obj"/>
+<name value="in3"/>
+<file value="/home/data/Volumes/Standard/p3_c7/p3_c7_input3.obj"/>
 </Layer1>
 <Layer2>
-<name value="in1"/>
-<file value="/home/data/Volumes/Standard/p3_c6/p3_c6_input1.obj"/>
+<name value="cellbody"/>
+<file value="/home/data/Volumes/Standard/p3_c7/p3_c7_cellbody.obj"/>
 </Layer2>
 <Layer3>
-<name value="in4"/>
-<file value="/home/data/Volumes/Standard/p3_c6/p3_c6_input4.obj"/>
+<name value="dendrite1"/>
+<file value="/home/data/Volumes/Standard/p3_c7/p3_c7_dendrite1.obj"/>
 </Layer3>
 <Layer4>
-<name value="cellbody"/>
-<file value="/home/data/Volumes/Standard/p3_c6/p3_c6_cellbody.obj"/>
+<name value="in1"/>
+<file value="/home/data/Volumes/Standard/p3_c7/p3_c7_input1.obj"/>
 </Layer4>
 <Layer5>
-<name value="dendrite"/>
-<file value="/home/data/Volumes/Standard/p3_c6/p3_c6_dendrite1.obj"/>
+<name value="axon"/>
+<file value="/home/data/Volumes/Standard/p3_c7/p3_c7_axon.obj"/>
 </Layer5>
 <Layer6>
-<name value="in3"/>
-<file value="/home/data/Volumes/Standard/p3_c6/p3_c6_input3.obj"/>
-</Layer6>
-<Layer7>
-<name value="nucleus"/>
-<file value="/home/data/Volumes/Standard/p3_c6/p3_c6_nucleus.obj"/>
-</Layer7>
-<Layer8>
 <name value="in2"/>
-<file value="/home/data/Volumes/Standard/p3_c6/p3_c6_input2.obj"/>
-</Layer8>
+<file value="/home/data/Volumes/Standard/p3_c7/p3_c7_input2.obj"/>
+</Layer6>
 </Cell0>
 <Cell1>
 <NumLayers value="6"/>
@@ -63,9 +55,48 @@
 <file value="/home/data/Volumes/Standard/p3_c5/p3_c5_input1.obj"/>
 </Layer4>
 <Layer5>
-<name value="dendrite"/>
+<name value="dendrite1"/>
 <file value="/home/data/Volumes/Standard/p3_c5/p3_c5_dendrite1.obj"/>
 </Layer5>
 </Cell1>
+<Cell2>
+<NumLayers value="9"/>
+<Layer0>
+<name value="in3"/>
+<file value="/home/data/Volumes/Standard/p3_c9/p3_c9_input3.obj"/>
+</Layer0>
+<Layer1>
+<name value="in1"/>
+<file value="/home/data/Volumes/Standard/p3_c9/p3_c9_input1.obj"/>
+</Layer1>
+<Layer2>
+<name value="nucleus"/>
+<file value="/home/data/Volumes/Standard/p3_c9/p3_c9_nucleus.obj"/>
+</Layer2>
+<Layer3>
+<name value="in4"/>
+<file value="/home/data/Volumes/Standard/p3_c9/p3_c9_input4.obj"/>
+</Layer3>
+<Layer4>
+<name value="dendrite1"/>
+<file value="/home/data/Volumes/Standard/p3_c9/p3_c9_dendrite1.obj"/>
+</Layer4>
+<Layer5>
+<name value="in5"/>
+<file value="/home/data/Volumes/Standard/p3_c9/p3_c9_input5.obj"/>
+</Layer5>
+<Layer6>
+<name value="axon"/>
+<file value="/home/data/Volumes/Standard/p3_c9/p3_c9_axon.obj"/>
+</Layer6>
+<Layer7>
+<name value="in2"/>
+<file value="/home/data/Volumes/Standard/p3_c9/p3_c9_input2.obj"/>
+</Layer7>
+<Layer8>
+<name value="cellbody"/>
+<file value="/home/data/Volumes/Standard/p3_c9/p3_c9_cellbody.obj"/>
+</Layer8>
+</Cell2>
 </Structure>
 </SetView>

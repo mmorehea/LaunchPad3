@@ -225,7 +225,8 @@ public class main extends javax.swing.JFrame {
         try {
             new XMLWriter(set).write();
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(rootPane, "Error writing xml file.");
+            //JOptionPane.showMessageDialog(rootPane, "Error writing xml file.");
+            ex.printStackTrace();
         } catch (GeneralException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         }
