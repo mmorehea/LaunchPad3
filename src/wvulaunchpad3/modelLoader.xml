@@ -1,6 +1,7 @@
 <ModelLoader value ="on">
 <ConfigDir value="/data/ModelLoader/" />
 <Files>
-<p3_c3_FULL path="/home/data/Volumes/Standard/p3_c3/p3_c3_FULL.obj" mask="0" />
+<p3_c6_FULL path="/home/data/Volumes/Standard/p3_c6/p3_c6_FULL.obj" mask="0" />
+<p3_c5_FULL path="/home/data/Volumes/Standard/p3_c5/p3_c5_FULL.obj" mask="0" />
 </Files>
 </ModelLoader>
